@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Dispositivos";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Dispositivo")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Ingreso Dispositivo")
+        {
+            <a href="~/Dispositivo/IngDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud Dispositivo")
+        {
+            <a href="~/Dispositivo/SolDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud BajoStock")
+        {
+            <a href="~/Dispositivo/SolBajoStock" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+
+<div class="jumbotron" style="text-align:center;">
+    <h2> Dispositivos <i class="glyphicon glyphicon-hdd"></i> </h2>
+</div>
+
+<div class="caption-full">
+    <h1> Que puedo hacer? </h1>
+    <p>
+         En el módulo de <b> DISPOSITIVOS </b> de <b> SIGINEC (Sistema Integrado de Gestión de NEC) </b> puedes realizar las siguientes actividades
+    </p>
+    <br />
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <b>Ingreso de Dispositivos</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    En la opción de <b> Ingreso Dispositivo </b> puedes ingresar nuevos dispositivos que ingresen
+                    a la bodega, tambien puedes editar las cantidades de los mismos cuando estos ya existen en la bodega y puedes ver sus
+                    espécificaciones si así lo requieres.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <b>Solicitud de Dispositivos</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    En la opción de <b> Solicitud Dispositivo </b> puedes solicitar a la bodega que alisten
+                    un equipo para la entrega a un cliente, esta opción te permite realizar seguimiento a la solicitud ya que esta se almacena bajo un
+                    ID adicionalmente informa por vía correo electrónico si no puedes acceder al aplicativo para conocer el estado de tu solicitud.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <b>Solicitud de Dispositivos cuando hay Bajo Stock en la Bodega</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    En la opción de <b> Solicitud BajoStock </b>
+                    puedes solicitar al Project Manager encargado del proyecto dispositivos que esten con cantidades limitadas en la bodega,
+                    esta opción te permite realizar un seguimiento a estas solicitides para que siempre esten los niveles en la Bodega en un
+                    aceptable.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

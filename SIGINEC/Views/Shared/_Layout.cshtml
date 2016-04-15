@@ -37,9 +37,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
-                    &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;SIGINEC 1.0 &nbsp; <i class="glyphicon glyphicon-calendar"></i>
-                </a>
+                @if (Session["Usuario"] != null && Session["Usuario"] != "")
+                {
+                    <a class="navbar-brand" href="/home/indexaf">
+                        &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;SIGINEC 1.0 &nbsp; <i class="glyphicon glyphicon-calendar"></i>
+                    </a>
+                }
+                else
+                {
+                    <a class="navbar-brand" href="/home/index">
+                        &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;SIGINEC 1.0 &nbsp; <i class="glyphicon glyphicon-calendar"></i>
+                    </a>
+                }
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
