@@ -5,6 +5,7 @@ namespace Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("Usuario")]
     public partial class Usuario
@@ -41,5 +42,7 @@ namespace Model
         public ICollection<Solicitud_BajoStock> Solicitud_BajoStock { get; set; }
 
         public ICollection<Solicitud_Dispositivo> Solicitud_Dispositivo { get; set; }
+
+        
     }
 }

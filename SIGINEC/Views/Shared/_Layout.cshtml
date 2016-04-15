@@ -37,12 +37,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> SIGINEC 1.0 &nbsp; <i class="glyphicon glyphicon-calendar"></i></a>
+                <a class="navbar-brand" href="#">
+                    &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;SIGINEC 1.0 &nbsp; <i class="glyphicon glyphicon-calendar"></i>
+                </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     @RenderSection("Menu1", false)
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                   <li class="active">
+                       <a href="#" id="@Session["Operacion"]"> @Session["Operacion"] </a>
+                   </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -81,17 +88,28 @@
         <footer>
             <div class="row" align="center">
                 <div class="col-lg-12">
-                    <p> <b> Desarrollado por Jorge Fonseca - 2016 </b> </p>
+                    <p> <b> Desarrollado por Jorge Fonseca <i class="glyphicon glyphicon-knight"></i> - 2016 </b> </p>
                 </div>
             </div>
         </footer>
 
     </div>
-   
-    <!-- Scripts -->
-    <script src="~/Assets/js/jquery.js"></script>
-    <script src="~/Assets/js/bootstrap.min.js"></script>
 
+    <div class="modal fade" id="modal1" tabindex="-1">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content modal-sm" id="content">
+                <div class="modal-body modal-sm">
+                    cargando...
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
 </body>
 
 </html>
+<!-- Scripts -->
+<script src="/Assets/js/jquery.js"></script>
+<script src="/Assets/js/bootstrap.min.js"></script>
+<script src="/Assets/js/Logic.js"></script>

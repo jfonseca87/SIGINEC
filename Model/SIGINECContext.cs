@@ -26,6 +26,9 @@ namespace Model
         public DbSet<Solicitud_BajoStock> Solicitud_BajoStock { get; set; }
         public DbSet<Solicitud_Dispositivo> Solicitud_Dispositivo { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Menu1> Menu1 { get; set; }
+        public DbSet<Menu2> Menu2 { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
