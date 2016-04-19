@@ -1,7 +1,5 @@
-﻿@model Model.Helpers.PagedData<Model.Dispositivo>
-
-@{
-    ViewBag.Title = "Ingreso Dispositivos";
+﻿@{
+    ViewBag.Title = "Solicitud Dispositivos";
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
     List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
 }
@@ -25,11 +23,11 @@
     {
         if (subP.subPagina == "Ingreso Dispositivo")
         {
-            <a href="~/Dispositivo/IngDispositivo" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+            <a href="~/Dispositivo/IngDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
         }
         else if (subP.subPagina == "Solicitud Dispositivo")
         {
-            <a href="~/Dispositivo/SolDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+            <a href="~/Dispositivo/SolDispositivo" class="list-group-item active"> <b> @subP.subPagina </b> </a>
         }
         else if (subP.subPagina == "Solicitud BajoStock")
         {
@@ -39,15 +37,12 @@
 }
 
 <div class="jumbotron" style="text-align:center;">
-    <h2> Ingreso Dispositivos <i class="glyphicon glyphicon-list-alt"></i> </h2>
+    <h2> Solicitud Dispositivos <i class="glyphicon glyphicon-time"></i> </h2>
 </div>
 
 <div>
-    <button class="btn btn-primary" id="nuevoDispositivo"> Nuevo Dispositivo </button> 
+    <button class="btn btn-primary" id="nuevaSolicitud"> Nueva Solicitud </button>
 </div>
 <br />
 <hr />
 <br />
-<div id="dispositivo-list" class="container col-xs-12">
-    @Html.Partial("DispositivoList")
-</div>

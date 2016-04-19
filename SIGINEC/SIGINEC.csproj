@@ -181,6 +181,21 @@
   <ItemGroup>
     <Content Include="Views\Dispositivo\IngDispositivo.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\insertDispositivo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\DispositivoList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\verDispositivo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\sumarCantidades.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\solDispositivo.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

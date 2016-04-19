@@ -58,6 +58,7 @@
     <Compile Include="Estados_Op.cs" />
     <Compile Include="Estado_Dispositivo.cs" />
     <Compile Include="Helpers\MD5Convert.cs" />
+    <Compile Include="Helpers\PagedData.cs" />
     <Compile Include="Ingreso_Dispositivo.cs" />
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />

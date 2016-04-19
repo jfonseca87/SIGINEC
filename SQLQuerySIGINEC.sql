@@ -100,6 +100,7 @@ CREATE TABLE Solicitud_Dispositivo
 	Observaciones varchar(max),
 	Estado_Solicitud int,
 	Id_Dispositivo int,
+	cantidad int,
 	Id_Cliente int,
 	Usuario_SolDispositivo int, 
 	Fecha_Solicitud datetime,

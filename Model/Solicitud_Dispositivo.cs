@@ -22,6 +22,8 @@ namespace Model
 
         public int? Id_Dispositivo { get; set; }
 
+        public int? Cantidad { get; set; }
+
         public int? Id_Cliente { get; set; }
 
         public int? Usuario_SolDispositivo { get; set; }

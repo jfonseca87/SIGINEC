@@ -22,5 +22,26 @@ namespace Model
         public Dispositivo Dispositivo { get; set; }
 
         public Usuario Usuario { get; set; }
+
+        public void guardaRegistro(string observaciones, int idDispositivo, int Usuario)
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Ingreso_Dispositivo.Add(new Ingreso_Dispositivo { 
+                        Observaciones = observaciones,
+                        Id_Dispositivo = idDispositivo,
+                        Usuario_Registra = Usuario,
+                        Fecha_Registro = System.DateTime.Now
+                    });
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
