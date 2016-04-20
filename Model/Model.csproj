@@ -72,6 +72,7 @@
     <Compile Include="Solicitud_Dispositivo.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="ViewIngresar.cs" />
+    <Compile Include="ViewSolicitudDispositivo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

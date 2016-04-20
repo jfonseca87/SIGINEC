@@ -14,6 +14,8 @@ namespace SIGINEC.Controllers
         Menu2 menu2 = new Menu2();
         Dispositivo dispositivo = new Dispositivo();
         Ingreso_Dispositivo inDisp = new Ingreso_Dispositivo();
+        Solicitud_Dispositivo solDisp = new Solicitud_Dispositivo();
+
         public const int PageSize = 10;
         //
         // GET: /Dispositivo/
@@ -33,18 +35,25 @@ namespace SIGINEC.Controllers
             return View( dispositivo.listarDispositivo(PageSize, 1));
         }
 
+        public ActionResult DispositivoList(int id)
+        {
+            return PartialView(dispositivo.listarDispositivo(PageSize, id));
+        }
+
         public ActionResult solDispositivo()
         {
             ViewBag.Menu1 = menu.listaMenu1();
             ViewBag.Menu2 = menu2.listarMenu2(1);
 
-            return View();
+            return View( solDisp.listarSolicitudes(PageSize, 1));
         }
 
-        public ActionResult DispositivoList(int id)
+
+        public ActionResult SolDispositivoList(int id)
         {
-            return PartialView(dispositivo.listarDispositivo(PageSize, id));
+            return PartialView(solDisp.listarSolicitudes(PageSize, id));
         }
+
 
         public ActionResult insertDispositivo(int id = 0)
         {
