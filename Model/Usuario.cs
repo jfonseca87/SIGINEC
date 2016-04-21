@@ -1,6 +1,7 @@
 namespace Model
 {
     using System;
+    using Model.Helpers;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -31,6 +32,8 @@ namespace Model
 
         public int? Activo { get; set; }
 
+        public string Tipo_Usuario { get; set; }
+
         public int? Id_Persona { get; set; }
 
         public ICollection<Bitacora> Bitacora { get; set; }
@@ -43,6 +46,27 @@ namespace Model
 
         public ICollection<Solicitud_Dispositivo> Solicitud_Dispositivo { get; set; }
 
+        public SesionUsuario LogInUsuario(string user, string password)
+        {
+            SesionUsuario sUsuario = new SesionUsuario();
+            MD5Convert convertidor = new MD5Convert();
+
+            string MD5Password = convertidor.MD5ConvertPassword(password);
+
+            using (var context = new SIGINECContext())
+            {
+                sUsuario = (from u in context.Usuario
+                            where u.Nick_usuario == user && u.Password_Usuario == MD5Password && u.Activo == 1
+                            select new SesionUsuario
+                            {
+                                IdUsuario = u.Id_Usuario,
+                                Usuario = u.Nick_usuario,
+                                Nombres = u.Persona.Nombre_1 + " " + u.Persona.Apellido_1
+                            }).First();
+            }
+
+            return sUsuario;
+        }
         
     }
 }

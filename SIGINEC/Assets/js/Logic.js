@@ -10,6 +10,11 @@
         $("#content1").load("/Dispositivo/insertDispositivo");
     });
 
+    $("#nuevaSolicitud").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load("/Dispositivo/nuevaSolicitud");
+    });
+
     $(".btn-success").click(function () {
         $("#modal2").modal("show");
         $("#content1").load("/Dispositivo/verDispositivo/" + $(this).data("id"));

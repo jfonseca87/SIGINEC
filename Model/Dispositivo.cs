@@ -83,6 +83,26 @@ namespace Model
             return disp;
         }
 
+        public List<Dispositivo> listarDispositivoDropDown()
+        {
+            List<Dispositivo> lstDispositivos = new List<Dispositivo>();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    lstDispositivos = context.Dispositivo.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return lstDispositivos;
+
+        }
+
         public Dispositivo ConsultaDispositivo(int id)
         {
             Dispositivo dispositivo = new Dispositivo();

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Bitacora.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="ClienteMostrar.cs" />
     <Compile Include="Detalle_Bitacora.cs" />
     <Compile Include="Detalle_Solicitud_BajoStock.cs" />
     <Compile Include="Dispositivo.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Ingreso_Dispositivo.cs" />
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />
+    <Compile Include="Solicitud_Dispositivo.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguimiento_BajoStock.cs" />
@@ -69,7 +71,6 @@
     <Compile Include="SesionUsuario.cs" />
     <Compile Include="SIGINECContext.cs" />
     <Compile Include="Solicitud_BajoStock.cs" />
-    <Compile Include="Solicitud_Dispositivo.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />

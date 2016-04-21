@@ -18,12 +18,14 @@ namespace Model
         [Key]
         public int Id_Solicitud { get; set; }
 
+        [Required(ErrorMessage="Debe agregar almenos una obervacion")]
         public string Observaciones { get; set; }
 
         public int? Estado_Solicitud { get; set; }
 
         public int? Id_Dispositivo { get; set; }
 
+        [Required(ErrorMessage = "Debe ingresar una cantidad")]
         public int? Cantidad { get; set; }
 
         public int? Id_Cliente { get; set; }
@@ -65,7 +67,7 @@ namespace Model
                                     }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
 
                     }
-                    else 
+                    else
                     {
                         sol.Data = (from s in context.Solicitud_Dispositivo
                                     orderby s.Id_Solicitud
@@ -78,10 +80,6 @@ namespace Model
                                         Cliente = s.Cliente.Persona.Nombre_1 + " " + s.Cliente.Persona.Apellido_1,
                                         FSolicitud = s.Fecha_Solicitud
                                     }).Take(PageSize).ToList();
-
-                        //List<ViewSolicitudDispositivo> lstSolicitudes = new List<ViewSolicitudDispositivo>();
-                        
-                        //foreach( var item in query)
 
                     }
 

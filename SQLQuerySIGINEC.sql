@@ -9,7 +9,7 @@ GO
 CREATE TABLE Persona
 (
 	Id_Persona int identity(1,1) primary key,
-	Tipo_Documento char(2) not null,
+	Tipo_Documento char(3) not null,
 	Numero_Documento varchar(50)not null,
 	Nombre_1 varchar(50)not null,
 	Nombre_2 varchar(50),
@@ -27,6 +27,7 @@ CREATE TABLE Usuario
 	Nick_usuario varchar(50)not null,
 	Password_Usuario varchar(32)not null,
 	Activo int, 
+	Tipo_Usuario varchar(3),
 	Id_Persona int,
 	foreign key (Id_Persona) references Persona(Id_Persona)
 	on delete cascade 
@@ -97,11 +98,11 @@ GO
 CREATE TABLE Solicitud_Dispositivo
 (
 	Id_Solicitud int identity(1,1) primary key,
-	Observaciones varchar(max),
+	Observaciones varchar(max) not null,
 	Estado_Solicitud int,
-	Id_Dispositivo int,
-	cantidad int,
-	Id_Cliente int,
+	Id_Dispositivo int not null,
+	cantidad int not null,
+	Id_Cliente int not null,
 	Usuario_SolDispositivo int, 
 	Fecha_Solicitud datetime,
 	foreign key (Id_Dispositivo) references Dispositivo(Id_Dispositivo)
@@ -198,4 +199,25 @@ CREATE TABLE Detalle_Bitacora
 	Foreign key (Id_Bitacora) references Bitacora(Id_Bitacora)
 	on delete cascade
 )
+
+GO
+
+create table Menu1
+(
+	id_Menu1 int identity(1,1) primary key,
+	pagina varchar(50) not null,
+	activa int 
+)
+
+GO
+
+create table Menu2
+(
+	id_Menu2 int identity(1,1) primary key,
+	subPagina varchar(50) not null,
+	activa int,
+	id_Menu1 int,
+	foreign key (id_Menu1) references Menu1(id_Menu1)
+)
+
 

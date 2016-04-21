@@ -9,7 +9,7 @@ namespace SIGINEC.Controllers
 {
     public class HomeController : Controller
     {
-        SesionUsuario usuario = new SesionUsuario();   
+        Usuario usuario = new Usuario();   
         //
         // GET: /Home/
 

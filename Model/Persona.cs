@@ -19,7 +19,7 @@ namespace Model
         public int Id_Persona { get; set; }
 
         [Required]
-        [StringLength(2)]
+        [StringLength(3)]
         public string Tipo_Documento { get; set; }
 
         [Required]

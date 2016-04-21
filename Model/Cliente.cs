@@ -5,6 +5,7 @@ namespace Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("Cliente")]
     public partial class Cliente
@@ -32,5 +33,30 @@ namespace Model
         public Persona Persona { get; set; }
 
         public virtual ICollection<Solicitud_Dispositivo> Solicitud_Dispositivo { get; set; }
+
+        public List<ClienteMostrar> listarCliente()
+        {
+            List<ClienteMostrar> cliente = new List<ClienteMostrar>();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    cliente = (from c in context.Cliente
+                               where c.Activo == 1
+                               select new ClienteMostrar
+                               {
+                                   IdCliente = c.Id_Cliente,
+                                   Nombre = c.Persona.Nombre_1 + " " + c.Persona.Apellido_1
+                               }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return cliente;
+        }
     }
 }
