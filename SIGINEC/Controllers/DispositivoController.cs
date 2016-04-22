@@ -126,9 +126,43 @@ namespace SIGINEC.Controllers
             {
                 if (ModelState.IsValid == true)
                 {
-                    //solDisp.guardarSolicitud();
+                    solicitud.Estado_Solicitud = 1;
+                    solicitud.Usuario_SolDispositivo = Convert.ToInt32(Session["IdUsuario"]);
+                    solicitud.Fecha_Solicitud = System.DateTime.Now;
+                    solDisp.crearSolicitud(solicitud);
 
                     return RedirectToAction("solDispositivo");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+
+            public ActionResult seguimientoSolicitud(int id)
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(1);
+
+                return View(solDisp.verSolicitud(id));
+            }
+
+            public ActionResult nuevoSeguimiento(int id)
+            {
+                ViewBag.IdSolicitud = id;
+                return View();
+            }
+
+            [HttpPost]
+            public ActionResult nuevoSeguimiento(Seguimiento_SolDispositivo seg)
+            {
+                if (ModelState.IsValid == true)
+                {
+                    seg.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
+                    seg.Fecha_Seguimiento = System.DateTime.Now;
+                    seg.creaSeguimiento();
+
+                    return RedirectToAction("seguimientoSolicitud/" + seg.Id_SolicitudDisp);
                 }
                 else
                 {

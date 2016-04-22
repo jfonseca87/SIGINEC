@@ -128,6 +128,16 @@ namespace Model
                 .HasMany(e => e.Solicitud_Dispositivo)
                 .WithOptional(e => e.Usuario)
                 .HasForeignKey(e => e.Usuario_SolDispositivo);
+
+            modelBuilder.Entity<Usuario>()
+                .HasMany(e => e.Seguimiento_SolDispositivo)
+                .WithOptional(e => e.Usuario)
+                .HasForeignKey(e => e.Usuario_Seguimiento);
+
+            modelBuilder.Entity<Usuario>()
+                .HasMany(e => e.Seguimiento_BajoStock)
+                .WithOptional(e => e.Usuario)
+                .HasForeignKey(e => e.Usuario_Seguimiento);
         }
     }
 }

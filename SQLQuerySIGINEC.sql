@@ -89,7 +89,7 @@ CREATE TABLE Ingreso_Dispositivo
 	Fecha_Registro datetime
 	foreign key (Usuario_Registra) references Usuario(Id_Usuario)
 	on delete cascade,
-	foreign key	(Id_Dispositivo) references Dispositivo(Id_Dispositivo)
+	foreign key (Id_Dispositivo) references Dispositivo(Id_Dispositivo)
 	on delete cascade
 )
 
@@ -124,6 +124,8 @@ CREATE TABLE Seguimiento_SolDispositivo
 	Fecha_Seguimiento Datetime,
 	Id_SolicitudDisp int,
 	foreign key (Id_SolicitudDisp) references Solicitud_Dispositivo(Id_Solicitud)
+	on delete cascade,
+	foreign key (Usuario_Seguimiento) references Usuario(Id_Usuario)
 	on delete cascade
 )
 
@@ -166,6 +168,8 @@ CREATE TABLE Seguimiento_BajoStock
 	Fecha_Seguimiento Datetime,
 	Id_Solicitud int,
 	foreign key (Id_Solicitud) references Solicitud_BajoStock(Id_Solicitud)
+	on delete cascade,
+	foreign key (Usuario_Seguimiento) references Usuario(Id_Usuario)
 	on delete cascade
 )
 

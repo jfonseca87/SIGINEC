@@ -17,3 +17,4 @@ C:\Users\USUARIO\Documents\Visual Studio 2015\Projects\SIGINEC\Model\bin\Debug\E
 C:\Users\USUARIO\Documents\Visual Studio 2015\Projects\SIGINEC\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\USUARIO\Documents\Visual Studio 2015\Projects\SIGINEC\Model\obj\Debug\Model.dll
 C:\Users\USUARIO\Documents\Visual Studio 2015\Projects\SIGINEC\Model\obj\Debug\Model.pdb
+C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

@@ -11,7 +11,7 @@ namespace Model
         [Key]
         public int Id_Seguimiento { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Es necesario que realice un seguimiento")]
         public string Seguimiento { get; set; }
 
         public int Usuario_Seguimiento { get; set; }
@@ -21,5 +21,23 @@ namespace Model
         public int? Id_SolicitudDisp { get; set; }
 
         public Solicitud_Dispositivo Solicitud_Dispositivo { get; set; }
+
+        public Usuario Usuario { get; set; }
+
+        public void creaSeguimiento()
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

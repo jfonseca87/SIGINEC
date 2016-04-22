@@ -73,6 +73,7 @@
     <Compile Include="Solicitud_BajoStock.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="ViewIngresar.cs" />
+    <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />
   </ItemGroup>
   <ItemGroup>

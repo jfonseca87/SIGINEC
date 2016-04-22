@@ -15,17 +15,17 @@
         $("#content1").load("/Dispositivo/nuevaSolicitud");
     });
 
-    $(".btn-success").click(function () {
+    $(".detalles").click(function () {
         $("#modal2").modal("show");
         $("#content1").load("/Dispositivo/verDispositivo/" + $(this).data("id"));
     });
 
-    $(".btn-warning").click(function () {
+    $(".edita").click(function () {
         $("#modal2").modal("show");
         $("#content1").load("/Dispositivo/insertDispositivo/" + $(this).data("id"));
     });
 
-    $(".btn-danger").click(function () {
+    $(".agregar").click(function () {
         $("#modal2").modal("show");
         $("#content1").load("/Dispositivo/sumarCantidades/" + $(this).data("id"));
     });
@@ -62,5 +62,47 @@
         var page = parseInt($(this).html());
 
         $("#dispositivo-list").load("/Dispositivo/DispositivoList/" + page);
+    });
+
+    $("#Nueva").click(function () {
+
+        var mensajes = "";
+        var idDispositivo = $("#Id_Dispositivo").val();
+        var cantidad = $("#Cantidad").val();
+        var idCliente = $("#Id_Cliente").val();
+        var observaciones = $("#Observaciones").val();
+
+        if (idDispositivo == "") {
+            mensajes = "• Debe seleccionar un dispositivo </br>";
+        }
+        if (cantidad == "")
+        {
+            mensajes += "• Debe ingresar una cantidad </br>";
+        }
+        if (idCliente == "")
+        {
+            mensajes += "• Debe asignar un cliente </br>";
+        }
+        if (observaciones == "") {
+            mensajes += "• Debe ingresar al menos una observación";
+        }
+
+        if (mensajes != "") {
+            $("#mensaje").html(mensajes);
+            mensajes = "";
+        }
+        else
+        {
+            $("#solDispForm").submit();
+        }
+    });
+
+    $(".seguimiento").click(function () {
+        location.href = "/Dispositivo/seguimientoSolicitud/" + $(this).data("id");
+    });
+
+    $("#nuevoSeguimiento").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load("/Dispositivo/nuevoSeguimiento/" + $(this).data("id"));
     });
 });

@@ -17,6 +17,8 @@ namespace Model
             Ingreso_Dispositivo = new List<Ingreso_Dispositivo>();
             Solicitud_BajoStock = new List<Solicitud_BajoStock>();
             Solicitud_Dispositivo = new List<Solicitud_Dispositivo>();
+            Seguimiento_SolDispositivo = new List<Seguimiento_SolDispositivo>();
+            Seguimiento_BajoStock = new List<Seguimiento_BajoStock>();
         }
 
         [Key]
@@ -45,6 +47,10 @@ namespace Model
         public ICollection<Solicitud_BajoStock> Solicitud_BajoStock { get; set; }
 
         public ICollection<Solicitud_Dispositivo> Solicitud_Dispositivo { get; set; }
+
+        public ICollection<Seguimiento_SolDispositivo> Seguimiento_SolDispositivo { get; set; }
+
+        public ICollection<Seguimiento_BajoStock> Seguimiento_BajoStock { get; set; }
 
         public SesionUsuario LogInUsuario(string user, string password)
         {

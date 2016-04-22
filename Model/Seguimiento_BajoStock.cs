@@ -21,5 +21,7 @@ namespace Model
         public int? Id_Solicitud { get; set; }
 
         public Solicitud_BajoStock Solicitud_BajoStock { get; set; }
+
+        public Usuario Usuario { get; set; }
     }
 }

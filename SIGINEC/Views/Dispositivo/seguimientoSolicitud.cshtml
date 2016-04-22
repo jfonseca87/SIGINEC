@@ -1,0 +1,60 @@
+﻿@model Model.viewSeguimiento
+
+@{
+    ViewBag.Title = "Solicitud # " + Model.IdSolicitud;
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Dispositivo")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Ingreso Dispositivo")
+        {
+            <a href="~/Dispositivo/IngDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud Dispositivo")
+        {
+            <a href="~/Dispositivo/SolDispositivo" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud BajoStock")
+        {
+            <a href="~/Dispositivo/SolBajoStock" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+
+<div class="jumbotron" style="text-align:center;">
+    <h2> Solicitud Dispositivo # @Model.IdSolicitud </h2>
+</div>
+@Html.HiddenFor(seg => seg.IdSolicitud)
+<div class="list-group">
+    <button type="button" class="list-group-item"> <b>Cliente: </b> @Html.DisplayFor(seg => seg.Cliente) </button>
+    <button type="button" class="list-group-item"> <b>Dispositivo: </b> @Html.DisplayFor(seg => seg.Dispositivo)</button>
+    <button type="button" class="list-group-item"> <b>Cantidad: </b> @Html.DisplayFor(seg => seg.Cantidad) </button>
+    <button type="button" class="list-group-item"> <b>Estado: </b> @Html.DisplayFor(seg => seg.Estado)</button>
+    <button type="button" class="list-group-item"> <b>Solicita: </b> @Html.DisplayFor(seg => seg.Solicita)</button>
+    <button type="button" class="list-group-item"> <b>Fecha Solicita: </b> @Html.DisplayFor(seg => seg.FSolicitud)</button>
+</div>
+<hr />
+<div>
+    <button class="btn btn-primary" id="nuevoSeguimiento" data-id="@Model.IdSolicitud"> Nuevo Seguimiento </button>
+</div>
+<hr />
+<div id="dispositivo-list" class="container col-xs-12">
+    @* @Html.Partial("SolDispositivoList") *@
+</div>

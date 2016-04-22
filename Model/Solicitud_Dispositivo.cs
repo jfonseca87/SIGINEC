@@ -63,6 +63,7 @@ namespace Model
                                         Dispositivo = s.Dispositivo.Nombre,
                                         Cantidad = s.Cantidad,
                                         Cliente = s.Cliente.Persona.Nombre_1 + ' ' + s.Cliente.Persona.Apellido_1,
+                                        Solicita = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
                                         FSolicitud = s.Fecha_Solicitud
                                     }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
 
@@ -78,6 +79,7 @@ namespace Model
                                         Dispositivo = s.Dispositivo.Nombre,
                                         Cantidad = s.Cantidad,
                                         Cliente = s.Cliente.Persona.Nombre_1 + " " + s.Cliente.Persona.Apellido_1,
+                                        Solicita = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
                                         FSolicitud = s.Fecha_Solicitud
                                     }).Take(PageSize).ToList();
 
@@ -93,6 +95,52 @@ namespace Model
             }
 
             return sol;
+        }
+
+        public void crearSolicitud( Solicitud_Dispositivo solicitud)
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Solicitud_Dispositivo.Add(solicitud);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public viewSeguimiento verSolicitud(int id)
+        {
+            viewSeguimiento seguimiento = new viewSeguimiento();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    seguimiento = (from seg in context.Solicitud_Dispositivo
+                                   where seg.Id_Solicitud == id
+                                   select new viewSeguimiento
+                                   {
+                                       IdSolicitud = seg.Id_Solicitud,
+                                       Cliente = seg.Cliente.Persona.Nombre_1 + " " + seg.Cliente.Persona.Apellido_1,
+                                       Dispositivo = seg.Dispositivo.Nombre,
+                                       Cantidad = seg.Cantidad,
+                                       Estado = seg.Estados_Op.Estado_Op,
+                                       Solicita = seg.Usuario.Persona.Nombre_1 + " " + seg.Usuario.Persona.Apellido_2,
+                                       FSolicitud = seg.Fecha_Solicitud
+                                   }).First();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return seguimiento;
         }
     }
 }
