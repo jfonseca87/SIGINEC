@@ -131,13 +131,14 @@ namespace Model
 
             modelBuilder.Entity<Usuario>()
                 .HasMany(e => e.Seguimiento_SolDispositivo)
-                .WithOptional(e => e.Usuario)
-                .HasForeignKey(e => e.Usuario_Seguimiento);
+                .WithRequired(e => e.Usuario)
+                .HasForeignKey(e => e.Usuario_Seguimiento)
+                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Usuario>()
-                .HasMany(e => e.Seguimiento_BajoStock)
-                .WithOptional(e => e.Usuario)
-                .HasForeignKey(e => e.Usuario_Seguimiento);
+            //modelBuilder.Entity<Usuario>()
+            //    .HasMany(e => e.Seguimiento_BajoStock)
+            //    .WithOptional(e => e.Usuario)
+            //    .HasForeignKey(e => e.Usuario_Seguimiento);
         }
     }
 }

@@ -55,6 +55,6 @@
     <button class="btn btn-primary" id="nuevoSeguimiento" data-id="@Model.IdSolicitud"> Nuevo Seguimiento </button>
 </div>
 <hr />
-<div id="dispositivo-list" class="container col-xs-12">
-    @* @Html.Partial("SolDispositivoList") *@
+<div id="detalle-list" data-id="@Model.IdSolicitud" class="container col-xs-12">
+    @Html.Partial("SeguimientoList")
 </div>

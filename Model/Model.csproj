@@ -60,6 +60,7 @@
     <Compile Include="Estado_Dispositivo.cs" />
     <Compile Include="Helpers\MD5Convert.cs" />
     <Compile Include="Helpers\PagedData.cs" />
+    <Compile Include="Helpers\RecortaTexto.cs" />
     <Compile Include="Ingreso_Dispositivo.cs" />
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="SIGINECContext.cs" />
     <Compile Include="Solicitud_BajoStock.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="ViewDetSeguimiento.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />

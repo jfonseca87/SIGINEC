@@ -62,7 +62,7 @@ namespace Model
                                         Estado = s.Estados_Op.Estado_Op,
                                         Dispositivo = s.Dispositivo.Nombre,
                                         Cantidad = s.Cantidad,
-                                        Cliente = s.Cliente.Persona.Nombre_1 + ' ' + s.Cliente.Persona.Apellido_1,
+                                        Cliente = s.Cliente.Persona.Nombre_1 + " " + s.Cliente.Persona.Apellido_1,
                                         Solicita = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
                                         FSolicitud = s.Fecha_Solicitud
                                     }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();

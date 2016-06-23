@@ -57,11 +57,26 @@
         });
     });
 
-    $(".page-number").click(function () {
+    $(".page-dispositivo").click(function () {
 
         var page = parseInt($(this).html());
 
         $("#dispositivo-list").load("/Dispositivo/DispositivoList/" + page);
+    });
+
+    $(".page-solicitud").click(function () {
+        
+        var page = parseInt($(this).html());
+
+        $("#solicitud-list").load("/Dispositivo/SolDispositivoList/" + page);
+    });
+
+    $(".page-detalle").click(function () {
+        
+        var page = parseInt($(this).html());
+        
+        $("#detalle-list").load("/Dispositivo/SeguimientoList?id="+ $("#detalle-list").data("id") +"&currentpage=" + page );
+        
     });
 
     $("#Nueva").click(function () {
@@ -101,8 +116,41 @@
         location.href = "/Dispositivo/seguimientoSolicitud/" + $(this).data("id");
     });
 
+    $(".cerrarSolicitud").click(function () {
+        $("#modal2").modal("show");
+    });
+
     $("#nuevoSeguimiento").click(function () {
         $("#modal2").modal("show");
         $("#content1").load("/Dispositivo/nuevoSeguimiento/" + $(this).data("id"));
+    });
+
+    $("#Cantidad").blur(function () {
+
+        var cantidad = $(this).val();
+        var dispositivo = $("#Id_Dispositivo").val();
+        var mensaje = "";
+
+        $.ajax({
+            url: "/Dispositivo/RetornaCantidad",
+            data: { id : dispositivo },
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data.Cantidad < cantidad) {
+                    $("#Nueva").attr("disabled", true);
+                    mensaje = "La cantidad supera el stock en inventario " + data.Cantidad + " Unds.";
+                    $("#mensaje").html(mensaje);
+                } else
+                {
+                    $("#Nueva").attr("disabled", false);
+                    mensaje = "";
+                    $("#mensaje").html(mensaje);
+                }
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error contacte con el departamento de Sistemas!!!");
+            }
+        });
     });
 });

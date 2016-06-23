@@ -16,9 +16,10 @@ namespace SIGINEC.Controllers
             Dispositivo dispositivo = new Dispositivo();
             Ingreso_Dispositivo inDisp = new Ingreso_Dispositivo();
             Solicitud_Dispositivo solDisp = new Solicitud_Dispositivo();
+            Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
             Cliente cliente = new Cliente();
             Estados_Op estadosSolicitud = new Estados_Op();
-            public const int PageSize = 10;
+            public const int PageSize = 2;
         #endregion
 
         //Index Pagina Dispositivos Principal
@@ -123,7 +124,7 @@ namespace SIGINEC.Controllers
 
             [HttpPost]
             public ActionResult nuevaSolicitud(Solicitud_Dispositivo solicitud)
-            {
+            {  
                 if (ModelState.IsValid == true)
                 {
                     solicitud.Estado_Solicitud = 1;
@@ -143,6 +144,7 @@ namespace SIGINEC.Controllers
             {
                 ViewBag.Menu1 = menu.listaMenu1();
                 ViewBag.Menu2 = menu2.listarMenu2(1);
+                ViewBag.Datos = seguimiento.ListarSeguimientos(id, PageSize, 1);
 
                 return View(solDisp.verSolicitud(id));
             }
@@ -151,6 +153,12 @@ namespace SIGINEC.Controllers
             {
                 ViewBag.IdSolicitud = id;
                 return View();
+            }
+
+            public ActionResult SeguimientoList(int id, int currentPage)
+            {
+                ViewBag.Datos = seguimiento.ListarSeguimientos(id, PageSize, currentPage);
+                return PartialView();
             }
 
             [HttpPost]
@@ -168,6 +176,18 @@ namespace SIGINEC.Controllers
                 {
                     return View();
                 }
+            }
+
+            [HttpPost]
+            public JsonResult RetornaCantidad(int id)
+            {
+                var Dispositivo = dispositivo.ConsultaDispositivo(id);
+                return Json(Dispositivo, JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult cerrarSolicitud()
+            {
+                return View();
             }
             
         #endregion

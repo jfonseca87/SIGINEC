@@ -1,6 +1,6 @@
 ﻿@model Model.Helpers.PagedData<Model.ViewSolicitudDispositivo>
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-responsive">
     <thead>
         <tr>
             <th> Id </th>
@@ -27,7 +27,7 @@
                     <button type="button" alt="Seguimiento" title="Seguimiento" class="btn btn-warning seguimiento" data-id="@sol.IdSolicitud">
                         <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
                     </button>
-                    <button type="button" alt="Cerrar Solicitud" title="Cerrar Solicitud" class="btn btn-danger cerrar" data-id="@sol.IdSolicitud">
+                    <button type="button" alt="Cerrar Solicitud" title="Cerrar Solicitud" class="btn btn-danger cerrarSolicitud" data-id="@sol.IdSolicitud">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>
                 </td>
@@ -43,13 +43,13 @@
                         if (i == Model.CurrentPage)
                         {
                             <li class="active">
-                                <a class="page-number" href="javascript:void();">@i</a>
+                                <a class="page-solicitud" href="javascript:void();">@i</a>
                             </li>
                         }
                         else
                         {
                             <li>
-                                <a class="page-number" href="javascript:void();">@i</a>
+                                <a class="page-solicitud" href="javascript:void();">@i</a>
                             </li>
                         }
                     }

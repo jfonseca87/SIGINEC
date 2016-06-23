@@ -132,7 +132,9 @@
     <Content Include="Global.asax" />
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -207,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Dispositivo\nuevoSeguimiento.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\SeguimientoList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
