@@ -34,5 +34,20 @@ namespace Model
         public ICollection<Seguimiento_BajoStock> Seguimiento_BajoStock { get; set; }
 
         public Usuario Usuario { get; set; }
+
+        public void guardarSolicitud()
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

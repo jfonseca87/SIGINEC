@@ -55,6 +55,7 @@ namespace Model
                     if (CurrentPage > 1)
                     {
                         sol.Data = (from s in context.Solicitud_Dispositivo
+                                    where s.Estado_Solicitud == 1
                                     orderby s.Id_Solicitud
                                     select new ViewSolicitudDispositivo
                                     {
@@ -71,6 +72,7 @@ namespace Model
                     else
                     {
                         sol.Data = (from s in context.Solicitud_Dispositivo
+                                    where s.Estado_Solicitud == 1
                                     orderby s.Id_Solicitud
                                     select new ViewSolicitudDispositivo
                                     {
@@ -85,7 +87,7 @@ namespace Model
 
                     }
 
-                    sol.NumberOfPages = Convert.ToInt32(Math.Ceiling((double)context.Solicitud_Dispositivo.Count() / PageSize));
+                    sol.NumberOfPages = Convert.ToInt32(Math.Ceiling((double)context.Solicitud_Dispositivo.Where(s => s.Estado_Solicitud == 1).Count() / PageSize));
                     sol.CurrentPage = CurrentPage;
                 }
                 catch (Exception ex)
@@ -141,6 +143,45 @@ namespace Model
             }
 
             return seguimiento;
+        }
+
+        public Solicitud_Dispositivo Solicitud(int id)
+        {
+            Solicitud_Dispositivo QuerySolicitud = new Solicitud_Dispositivo();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    QuerySolicitud = context.Solicitud_Dispositivo.Where(seg => seg.Id_Solicitud == id).First();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return QuerySolicitud;
+        }
+
+        public void CerrarSolicitudDispositivo(int id)
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    var Solicitud = (from sol in context.Solicitud_Dispositivo
+                                     where sol.Id_Solicitud == id
+                                     select sol).First();
+
+                    Solicitud.Estado_Solicitud = 2;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

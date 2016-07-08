@@ -20,6 +20,7 @@ namespace SIGINEC.Controllers
             Cliente cliente = new Cliente();
             Estados_Op estadosSolicitud = new Estados_Op();
             public const int PageSize = 2;
+            static List<ViewSolBajoStock> lstSolBajoStock = new List<ViewSolBajoStock>();
         #endregion
 
         //Index Pagina Dispositivos Principal
@@ -185,11 +186,92 @@ namespace SIGINEC.Controllers
                 return Json(Dispositivo, JsonRequestBehavior.AllowGet);
             }
 
-            public ActionResult cerrarSolicitud()
+            public ActionResult cerrarSolicitud(int id)
             {
+                ViewBag.ID = id;
                 return View();
             }
+
+            [HttpPost]
+            public ActionResult cerrarSolicitud(ViewCerrarSolicitudDispositivo cerrarSolicitud)
+            {
+                Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
+
+                if (ModelState.IsValid == true)
+                {
+                    seguimiento.Seguimiento = cerrarSolicitud.Observaciones;
+                    seguimiento.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
+                    seguimiento.Fecha_Seguimiento = System.DateTime.Now;
+                    seguimiento.Id_SolicitudDisp = cerrarSolicitud.Id;
+                    seguimiento.creaSeguimiento();
+
+                    solDisp.CerrarSolicitudDispositivo(cerrarSolicitud.Id);
+
+                    if (cerrarSolicitud.ResuelveSolicitud == 1)
+                    {
+                        var disp = solDisp.Solicitud(cerrarSolicitud.Id);
+                        dispositivo.DescontarUnidades(Convert.ToInt16(disp.Id_Dispositivo), Convert.ToInt16(disp.Cantidad));
+                    }
+
+                    return RedirectToAction("solDispositivo");
+                }
+                else
+                {
+                    return View();
+                }
+            }
             
+        #endregion
+
+        //Lógica para el mantenimiento de Solicitudes cuando el stock esta bajo
+        #region Solicitud_BajoStock
+
+            public ActionResult SolBajoStock()
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(1);
+
+                return View();
+            }
+
+            public ActionResult nuevaSolBajoStock()
+            {
+                ViewBag.Dispositivos = dispositivo.listarDispositivoDropDown();
+                lstSolBajoStock = new List<ViewSolBajoStock>();
+
+                return View();
+            }
+
+            [HttpPost]
+            public ActionResult nuevaSolBajoStock(ViewSolBajoStock solBSTK)
+            {
+                return RedirectToAction("SolBajoStock");
+            }
+
+            [HttpPost]
+            public JsonResult FillTableSolBajoStock(ViewSolBajoStock solBS)
+            {
+
+                ViewSolBajoStock obj1 = new ViewSolBajoStock();
+                int? id = solBS.Id_Dispositivo;
+
+                if (lstSolBajoStock.Count() == 0)
+                {
+                    lstSolBajoStock.Add(solBS);
+                }
+                else
+                {
+                    obj1 = lstSolBajoStock.Where(s => s.Id_Dispositivo == id).FirstOrDefault();
+
+                    if (obj1 == null)
+                    {
+                        lstSolBajoStock.Add(solBS);
+                    }
+                }
+
+                return Json(lstSolBajoStock, JsonRequestBehavior.AllowGet);
+            }
+
         #endregion
     }
 }

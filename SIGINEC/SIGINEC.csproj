@@ -213,6 +213,15 @@
   <ItemGroup>
     <Content Include="Views\Dispositivo\SeguimientoList.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\cerrarSolicitud.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\SolBajoStock.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dispositivo\nuevaSolBajoStock.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

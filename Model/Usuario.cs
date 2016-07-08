@@ -68,7 +68,7 @@ namespace Model
                                 IdUsuario = u.Id_Usuario,
                                 Usuario = u.Nick_usuario,
                                 Nombres = u.Persona.Nombre_1 +" "+ u.Persona.Apellido_1 
-                            }).First();
+                            }).FirstOrDefault();
             }
 
             return sUsuario;

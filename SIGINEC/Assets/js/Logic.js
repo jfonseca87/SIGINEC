@@ -118,6 +118,7 @@
 
     $(".cerrarSolicitud").click(function () {
         $("#modal2").modal("show");
+        $("#content1").load("/Dispositivo/cerrarSolicitud/" + $(this).data("id"));
     });
 
     $("#nuevoSeguimiento").click(function () {
@@ -152,5 +153,53 @@
                 alert("Ha ocurrido un error contacte con el departamento de Sistemas!!!");
             }
         });
+    });
+
+    $("#nuevaSolicitudBajoStock").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load("/Dispositivo/nuevaSolBajoStock");
+    });
+
+    $("#selDispositivos").click(function () {
+
+        var id = $("#Id_Dispositivo").val();
+        var dispositivo = $("#Id_Dispositivo option:selected").html();
+        var cantidad = $("#CantidadDisp").val();
+
+        if (id != "" && cantidad != "")
+        {
+            $.ajax({
+                url: "/Dispositivo/FillTableSolBajoStock",
+                data:
+                {
+                    Id_Dispositivo: id,
+                    Dispositivo: dispositivo,
+                    CantidadDisp: cantidad
+                },
+                method: "POST",
+                datatype: "json",
+                success: function (data) {
+                    $("#tDispositivos").empty();
+                    if (id != 0 && cantidad != 0) {
+                        $.each(data, function (i, item) {
+                            $("#tDispositivos").append(
+                                "<tr>" +
+                                "<td>" + item.Id_Dispositivo + "</td>" +
+                                "<td>" + item.Dispositivo + "</td>" +
+                                "<td>" + item.CantidadDisp + "</td>" +
+                                "</tr>"
+                            );
+                        });
+
+                        $("#Id_Dispositivo").prop("selectedIndex", 0);
+                        $("#CantidadDisp").val("");
+                        $("#NuevaBS").removeClass("disabled");
+                    }
+                },
+                fail: function (mensaje) {
+                    alert("Ha ocurrido un error gravisimo!!!")
+                }
+            });
+        }
     });
 });

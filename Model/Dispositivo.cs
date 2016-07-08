@@ -145,5 +145,25 @@ namespace Model
                 throw new Exception(ex.Message);
             }
         }
+
+        public void DescontarUnidades(int id, int cantDescontar)
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    var Dispositivo = (from disp in context.Dispositivo
+                                       where disp.Id_Dispositivo == id
+                                       select disp).First();
+
+                    Dispositivo.Cantidad -= cantDescontar;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

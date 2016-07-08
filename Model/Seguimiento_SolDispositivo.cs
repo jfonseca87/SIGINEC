@@ -88,7 +88,5 @@ namespace Model
 
             return seg;
         }
-
-
     }
 }
