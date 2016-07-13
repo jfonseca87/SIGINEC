@@ -17,6 +17,8 @@ namespace SIGINEC.Controllers
             Ingreso_Dispositivo inDisp = new Ingreso_Dispositivo();
             Solicitud_Dispositivo solDisp = new Solicitud_Dispositivo();
             Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
+            Solicitud_BajoStock solBajoStock = new Solicitud_BajoStock();
+            Detalle_Solicitud_BajoStock detSolBajoStock = new Detalle_Solicitud_BajoStock();
             Cliente cliente = new Cliente();
             Estados_Op estadosSolicitud = new Estados_Op();
             public const int PageSize = 2;
@@ -245,6 +247,25 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult nuevaSolBajoStock(ViewSolBajoStock solBSTK)
             {
+                int idSolicitud = 0;
+
+                solBajoStock.Observaciones = solBSTK.Observaciones;
+                solBajoStock.Estado_Solicitud = 1;
+                solBajoStock.Usuario_SolBajoStock = Convert.ToInt16(Session["IdUsuario"]);
+                solBajoStock.Fecha_Solicitud = System.DateTime.Now;
+                solBajoStock.Usuario_Responsable = Convert.ToInt16(Session["IdUsuario"]);
+
+                solBajoStock.guardarSolicitud();
+                idSolicitud = solBajoStock.retornaIdSol(Convert.ToInt16(Session["IdUsuario"]));
+
+                foreach (var item in lstSolBajoStock)
+                {
+                    detSolBajoStock.Id_Dispositivo = item.Id_Dispositivo;
+                    detSolBajoStock.Cantidad = item.CantidadDisp;
+                    detSolBajoStock.Id_Solicitud_Stock = idSolicitud;
+                    detSolBajoStock.guardaDetalle();
+                }
+
                 return RedirectToAction("SolBajoStock");
             }
 

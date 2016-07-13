@@ -5,6 +5,7 @@ namespace Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class Solicitud_BajoStock
     {
@@ -42,12 +43,34 @@ namespace Model
                 using (var context = new SIGINECContext())
                 {
                     context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public int retornaIdSol(int idUsuario)
+        {
+            int idSolicitud = 0;
+            try 
+            {
+                using (var context = new SIGINECContext())
+                {
+                    idSolicitud = (from sol in context.Solicitud_BajoStock
+                                   where sol.Usuario_SolBajoStock == idUsuario && sol.Estado_Solicitud == 1
+                                   orderby sol.Id_Solicitud descending
+                                   select sol.Id_Solicitud).FirstOrDefault();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return idSolicitud;
         }
     }
 }

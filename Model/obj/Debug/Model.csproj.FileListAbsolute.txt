@@ -37,3 +37,4 @@ D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\Model\bin\D
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\Model\obj\Debug\Model.dll
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\Model\obj\Debug\Model.pdb
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

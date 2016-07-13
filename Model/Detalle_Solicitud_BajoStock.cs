@@ -20,5 +20,21 @@ namespace Model
         public Dispositivo Dispositivo { get; set; }
 
         public Solicitud_BajoStock Solicitud_BajoStock { get; set; }
+
+        public void guardaDetalle()
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
