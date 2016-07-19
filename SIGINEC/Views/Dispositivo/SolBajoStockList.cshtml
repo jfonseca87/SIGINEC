@@ -1,14 +1,13 @@
-﻿@model Model.Helpers.PagedData<Model.ViewSolicitudDispositivo>
+﻿@model Model.Helpers.PagedData<Model.ViewSolicitudBajoStock>
 
 <table class="table table-hover table-striped table-responsive">
     <thead>
         <tr>
             <th> Id </th>
-            <th> Cliente </th>
-            <th> Dispositivo </th>
-            <th> Cantidad </th>
+            <th> Observaciones </th>
             <th> Estado </th>
             <th> Solicita </th>
+            <th> Responsable </th>
             <th> Fecha Solicitud </th>
         </tr>
     </thead>
@@ -17,12 +16,11 @@
         {
             <tr>
                 <td> @Html.DisplayFor(s => sol.IdSolicitud) </td>
-                <td> @Html.DisplayFor(s => sol.Cliente) </td>
-                <td> @Html.DisplayFor(s => sol.Dispositivo) </td>
-                <td> @Html.DisplayFor(s => sol.Cantidad) </td>
+                <td> @Html.DisplayFor(s => sol.Observaciones) </td>
                 <td> @Html.DisplayFor(s => sol.Estado) </td>
-                <td> @Html.DisplayFor(s => sol.Solicita) </td>
-                <td> @Html.DisplayFor(s => sol.FSolicitud) </td>
+                <td> @Html.DisplayFor(s => sol.UsuarioSol) </td>
+                <td> @Html.DisplayFor(s => sol.UsuarioResp) </td>
+                <td> @Html.DisplayFor(s => sol.FechaSol) </td>
                 <td style="text-align:right;">
                     <button type="button" alt="Seguimiento" title="Seguimiento" class="btn btn-warning seguimientoBS" data-id="@sol.IdSolicitud">
                         <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>

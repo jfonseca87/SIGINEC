@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class ViewSolicitudBajoStock
+    public class ViewSeguimientoBS
     {
         public int IdSolicitud { get; set; }
         public string Observaciones { get; set; }
         public string Estado { get; set; }
         public string UsuarioSol { get; set; }
-        public DateTime? FechaSol { get; set; }
         public string UsuarioResp { get; set; }
+        public DateTime? FechaSolicitud { get; set; }
+        public List<DetalleDispositivo> lstDetalleSolBS { get; set; }
     }
 }

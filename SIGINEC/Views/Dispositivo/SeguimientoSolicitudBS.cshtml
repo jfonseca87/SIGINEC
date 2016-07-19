@@ -1,0 +1,80 @@
+﻿@model Model.ViewSeguimientoBS
+
+@{
+    ViewBag.Title = "Solicitud Bajo Stock # " + Model.IdSolicitud;
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Dispositivo")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Ingreso Dispositivo")
+        {
+            <a href="~/Dispositivo/IngDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud Dispositivo")
+        {
+            <a href="~/Dispositivo/SolDispositivo" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Solicitud BajoStock")
+        {
+            <a href="~/Dispositivo/SolBajoStock" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Solicitud Dispositivos Bajo Stock # @Model.IdSolicitud </h2>
+</div>
+@Html.HiddenFor(segBs => segBs.IdSolicitud)
+<div class="list-group">
+    <button type="button" class="list-group-item"> <b>Observaciones: </b> @Html.DisplayFor(segBS => segBS.Observaciones) </button>
+    <button type="button" class="list-group-item"> <b>Estado: </b> @Html.DisplayFor(segBS => segBS.Estado)</button>
+    <button type="button" class="list-group-item"> <b>Usuario Solicita: </b> @Html.DisplayFor(segBS => segBS.UsuarioSol) </button>
+    <button type="button" class="list-group-item"> <b>Usuario Responsable: </b> @Html.DisplayFor(segBS => segBS.UsuarioResp)</button>
+    <button type="button" class="list-group-item"> <b>Fecha Solicita: </b> @Html.DisplayFor(segBS => segBS.FechaSolicitud)</button>
+</div>
+<hr />
+<div>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th> </th>
+                <th> ID </th>
+                <th> Dispositivo </th>
+                <th> Cantidad </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstDetalleSolBS)
+            {
+                <tr>
+                    <td align="center"> <i class="glyphicon glyphicon-star"></i> </td>
+                    <td> @item.Id_Dispositivo </td>
+                    <td> @item.Dispositivo </td>
+                    <td> @item.Cantidad </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<hr />
+<div>
+    <button class="btn btn-primary" id="nSeguimientoBS" data-id="@Model.IdSolicitud"> Nuevo Seguimiento </button>
+</div>
+<hr />
+@*<div id="detalle-list" data-id="@Model.IdSolicitud" class="container col-xs-12">
+   @* @Html.Partial("SeguimientoList")
+</div>*@

@@ -202,4 +202,15 @@
             });
         }
     });
+
+    $(".page-solicitudBS").click(function () {
+
+        var page = parseInt($(this).html());
+
+        $("#solicitud-list").load("/Dispositivo/SolBajoStockList/" + page);
+    });
+
+    $(".seguimientoBS").click(function () {
+        location.href = "/Dispositivo/seguimientoSolicitudBS/" + $(this).data("id");
+    });
 });

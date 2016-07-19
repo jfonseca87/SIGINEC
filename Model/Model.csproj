@@ -53,6 +53,8 @@
     <Compile Include="Bitacora.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteMostrar.cs" />
+    <Compile Include="DetalleDispositivo.cs" />
+    <Compile Include="DetalleSolBS.cs" />
     <Compile Include="Detalle_Bitacora.cs" />
     <Compile Include="Detalle_Solicitud_BajoStock.cs" />
     <Compile Include="Dispositivo.cs" />
@@ -77,7 +79,9 @@
     <Compile Include="ViewDetSeguimiento.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="viewSeguimiento.cs" />
+    <Compile Include="ViewSeguimientoBS.cs" />
     <Compile Include="ViewSolBajoStock.cs" />
+    <Compile Include="ViewSolicitudBajoStock.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />
   </ItemGroup>
   <ItemGroup>

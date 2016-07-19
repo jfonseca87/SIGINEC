@@ -233,7 +233,12 @@ namespace SIGINEC.Controllers
                 ViewBag.Menu1 = menu.listaMenu1();
                 ViewBag.Menu2 = menu2.listarMenu2(1);
 
-                return View();
+                return View(solBajoStock.listarSolicitudesBS(PageSize,1));
+            }
+
+            public ActionResult SolBajoStockList(int id)
+            {
+                return PartialView(solBajoStock.listarSolicitudesBS(PageSize, id));
             }
 
             public ActionResult nuevaSolBajoStock()
@@ -291,6 +296,15 @@ namespace SIGINEC.Controllers
                 }
 
                 return Json(lstSolBajoStock, JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult SeguimientoSolicitudBS(int id)
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(1);
+                //ViewBag.Datos = ;
+
+                return View(solBajoStock.detalleSolBS(id));
             }
 
         #endregion
