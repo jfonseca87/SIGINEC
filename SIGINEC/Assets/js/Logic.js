@@ -1,37 +1,40 @@
 ﻿$(document).ready(function () {
 
+    //var url = "http://192.168.0.20/siginec";
+    var url = "http://localhost:49240/";
+
     $("#LogIn").click(function () {
         $("#modal1").modal();
-        $("#content").load("/home/Ingresar");
+        $("#content").load(url + "/Home/Ingresar");
     });
 
     $("#nuevoDispositivo").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/insertDispositivo");
+        $("#content1").load(url + "/Dispositivo/insertDispositivo");
     });
 
     $("#nuevaSolicitud").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/nuevaSolicitud");
+        $("#content1").load(url + "/Dispositivo/nuevaSolicitud");
     });
 
     $(".detalles").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/verDispositivo/" + $(this).data("id"));
+        $("#content1").load(url + "/Dispositivo/verDispositivo/" + $(this).data("id"));
     });
 
     $(".edita").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/insertDispositivo/" + $(this).data("id"));
+        $("#content1").load(url + "/Dispositivo/insertDispositivo/" + $(this).data("id"));
     });
 
     $(".agregar").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/sumarCantidades/" + $(this).data("id"));
+        $("#content1").load(url + "/Dispositivo/sumarCantidades/" + $(this).data("id"));
     });
 
     $("#LogOut").click(function () {
-        location.href = "/home/Salir";
+        location.href = url + "/home/Salir";
     });
 
     $("#Entrar").click(function () {
@@ -39,13 +42,13 @@
         var datos = $("#ingForm").serialize();
 
         $.ajax({
-            url: "/home/Ingresar",
+            url: url + '/home/ingresar',
             data: datos,
             type: "POST",
             datatype: "json",
             success: function (data) {
                 if (data.IdUsuario != 0) {
-                    location.href = "/home/indexaf";
+                    location.href = url + "/home/indexaf";
                 } else
                 {
                     $("#mensaje").show();
@@ -61,21 +64,21 @@
 
         var page = parseInt($(this).html());
 
-        $("#dispositivo-list").load("/Dispositivo/DispositivoList/" + page);
+        $("#dispositivo-list").load(url + "/Dispositivo/DispositivoList/" + page);
     });
 
     $(".page-solicitud").click(function () {
         
         var page = parseInt($(this).html());
 
-        $("#solicitud-list").load("/Dispositivo/SolDispositivoList/" + page);
+        $("#solicitud-list").load(url + "/Dispositivo/SolDispositivoList/" + page);
     });
 
     $(".page-detalle").click(function () {
         
         var page = parseInt($(this).html());
         
-        $("#detalle-list").load("/Dispositivo/SeguimientoList?id="+ $("#detalle-list").data("id") +"&currentpage=" + page );
+        $("#detalle-list").load(url + "/Dispositivo/SeguimientoList?id="+ $("#detalle-list").data("id") +"&currentpage=" + page );
         
     });
 
@@ -113,17 +116,17 @@
     });
 
     $(".seguimiento").click(function () {
-        location.href = "/Dispositivo/seguimientoSolicitud/" + $(this).data("id");
+        location.href = url + "/Dispositivo/seguimientoSolicitud/" + $(this).data("id");
     });
 
     $(".cerrarSolicitud").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/cerrarSolicitud/" + $(this).data("id"));
+        $("#content1").load(url + "/Dispositivo/cerrarSolicitud/" + $(this).data("id"));
     });
 
     $("#nuevoSeguimiento").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/nuevoSeguimiento/" + $(this).data("id"));
+        $("#content1").load(url + "/Dispositivo/nuevoSeguimiento/" + $(this).data("id"));
     });
 
     $("#Cantidad").blur(function () {
@@ -133,7 +136,7 @@
         var mensaje = "";
 
         $.ajax({
-            url: "/Dispositivo/RetornaCantidad",
+            url: url + "/Dispositivo/RetornaCantidad",
             data: { id : dispositivo },
             type: "POST",
             datatype: "json",
@@ -157,7 +160,7 @@
 
     $("#nuevaSolicitudBajoStock").click(function () {
         $("#modal2").modal("show");
-        $("#content1").load("/Dispositivo/nuevaSolBajoStock");
+        $("#content1").load(url + "/Dispositivo/nuevaSolBajoStock");
     });
 
     $("#selDispositivos").click(function () {
@@ -169,7 +172,7 @@
         if (id != "" && cantidad != "")
         {
             $.ajax({
-                url: "/Dispositivo/FillTableSolBajoStock",
+                url: url + "/Dispositivo/FillTableSolBajoStock",
                 data:
                 {
                     Id_Dispositivo: id,
@@ -207,10 +210,61 @@
 
         var page = parseInt($(this).html());
 
-        $("#solicitud-list").load("/Dispositivo/SolBajoStockList/" + page);
+        $("#solicitud-list").load(url + "/Dispositivo/SolBajoStockList/" + page);
     });
 
     $(".seguimientoBS").click(function () {
-        location.href = "/Dispositivo/seguimientoSolicitudBS/" + $(this).data("id");
+        location.href = url + "/Dispositivo/seguimientoSolicitudBS/" + $(this).data("id");
+    });
+
+    $("#nSeguimientoBS").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Dispositivo/crearSeguimientoBS/" + $(this).data("id"));
+    });
+
+    $(".page-detalleBS").click(function () {
+
+        var page = parseInt($(this).html());
+
+        $("#detalle-list").load(url + "/Dispositivo/SeguimientoBSList?id=" + $("#detalle-list").data("id") + "&currentpage=" + page);
+    });
+
+    $(".cerrarSolicitudBS").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Dispositivo/cerrarSolBS/" + $(this).data("id"));
+    });
+
+    $("#nuevaBitacora").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Bitacora/nuevaBitacora");
+    });
+
+    $("#adjunto").change(function () {
+
+        $.ajax({
+            url: url + "/Bitacora/listAdjuntos",
+            data:
+            {
+                Fotografia : $(this).val()
+            },
+            method: "POST",
+            datatype: "json",
+            success: function (data) {
+                $("#contenedor").empty();
+                $.each(data, function (i, item) {
+                    $("#contenedor").append(
+                        '<button type="button" class="list-group-item list-group-item-info" id="elimina-item">'+ item.Fotografia +'</button>'
+                    );
+                });
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+    });
+
+    $("#contenedor button:first").click(function () {
+        debugger
+        alert("Vas a borrar algo... be careful...");
     });
 });

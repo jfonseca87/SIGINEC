@@ -10,7 +10,7 @@ namespace SIGINEC.Controllers
 {
     public class DispositivoController : Controller
     {
-        #region Variables
+        #region Variables y Objetos
             Menu1 menu = new Menu1();
             Menu2 menu2 = new Menu2();
             Dispositivo dispositivo = new Dispositivo();
@@ -19,6 +19,7 @@ namespace SIGINEC.Controllers
             Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
             Solicitud_BajoStock solBajoStock = new Solicitud_BajoStock();
             Detalle_Solicitud_BajoStock detSolBajoStock = new Detalle_Solicitud_BajoStock();
+            Seguimiento_BajoStock segBajoStock = new Seguimiento_BajoStock();
             Cliente cliente = new Cliente();
             Estados_Op estadosSolicitud = new Estados_Op();
             public const int PageSize = 2;
@@ -152,16 +153,16 @@ namespace SIGINEC.Controllers
                 return View(solDisp.verSolicitud(id));
             }
 
-            public ActionResult nuevoSeguimiento(int id)
-            {
-                ViewBag.IdSolicitud = id;
-                return View();
-            }
-
             public ActionResult SeguimientoList(int id, int currentPage)
             {
                 ViewBag.Datos = seguimiento.ListarSeguimientos(id, PageSize, currentPage);
                 return PartialView();
+            }
+
+            public ActionResult nuevoSeguimiento(int id)
+            {
+                ViewBag.IdSolicitud = id;
+                return View();
             }
 
             [HttpPost]
@@ -302,9 +303,70 @@ namespace SIGINEC.Controllers
             {
                 ViewBag.Menu1 = menu.listaMenu1();
                 ViewBag.Menu2 = menu2.listarMenu2(1);
-                //ViewBag.Datos = ;
+                ViewBag.Datos = segBajoStock.ListarSeguimientosBS(id, PageSize, 1);
 
                 return View(solBajoStock.detalleSolBS(id));
+            }
+
+            public ActionResult SeguimientoBSList(int id, int currentPage)
+            {
+                ViewBag.Datos = segBajoStock.ListarSeguimientosBS(id, PageSize, currentPage);
+                return PartialView();
+            }
+
+            public ActionResult crearSeguimientoBS(int id)
+            {
+                ViewBag.IdSolicitudBS = id;
+
+                return View(); 
+            }
+
+            [HttpPost]
+            public ActionResult crearSeguimientoBS(Seguimiento_BajoStock segBS)
+            {
+                if (ModelState.IsValid == true)
+                {
+                    segBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
+                    segBS.Fecha_Seguimiento = System.DateTime.Now;
+
+                    segBS.crearSeguimientoBS();
+
+                    return RedirectToAction("SeguimientoSolicitudBS/" + segBS.Id_Solicitud);
+                }
+                else
+                {
+                    return View();
+                }
+            }
+
+            public ActionResult cerrarSolBS(int id)
+            {
+                ViewBag.ID = id;
+
+                return View();
+            }
+
+            [HttpPost]
+            public ActionResult cerrarSolBS(ViewCerrarSolicitudDispositivo cerrarSolBS)
+            {
+                Seguimiento_BajoStock seguimientoBS = new Seguimiento_BajoStock();
+
+                if (ModelState.IsValid == true)
+                {
+                    seguimientoBS.Seguimiento = cerrarSolBS.Observaciones;
+                    seguimientoBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
+                    seguimientoBS.Fecha_Seguimiento = System.DateTime.Now;
+                    seguimientoBS.Id_Solicitud = cerrarSolBS.Id;
+                    seguimientoBS.crearSeguimientoBS();
+
+                    solBajoStock.CerrarSolicitudDispositivoBS(cerrarSolBS.Id);
+
+                    return RedirectToAction("solBajoStock");
+                }
+                else
+                {
+                    return View();
+                }
             }
 
         #endregion

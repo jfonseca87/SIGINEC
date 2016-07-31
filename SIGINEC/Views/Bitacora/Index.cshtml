@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Bitacoras";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Bitacora")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Bitacora")
+        {
+            <a href="~/Bitacora/detBitacora" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Bitacora <i class="glyphicon glyphicon-list-alt"></i> </h2>
+</div>
+<div class="caption-full">
+    <h1> Que puedo hacer? </h1>
+    <p>
+        En el módulo de <b> Bitactoras </b> de <b> SIGINEC (Sistema Integrado de Gestión de NEC) </b> puedes realizar las actividades relacionadas con la creación y registro 
+        detallado de los dispositivos que devuelve el cliente porque presentan algún desperfecto, tambien se permite adjuntar imagenes para tener una prueba visual del estado
+        del dispositivo y dependiendo del estado se carga automaticamente al inventario o se informa a casa matriz si el dispositivo se debe devolver.
+    </p>
+</div>    

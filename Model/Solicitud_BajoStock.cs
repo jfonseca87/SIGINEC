@@ -169,5 +169,25 @@ namespace Model
 
             return vSeguimientoBS;
         }
+
+        public void CerrarSolicitudDispositivoBS(int id)
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    var Solicitud = (from sol in context.Solicitud_BajoStock
+                                     where sol.Id_Solicitud == id
+                                     select sol).First();
+
+                    Solicitud.Estado_Solicitud = 2;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

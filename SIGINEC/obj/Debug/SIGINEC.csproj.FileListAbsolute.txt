@@ -126,3 +126,5 @@ D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.csprojResolveAssemblyReference.cache
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.dll
 D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.pdb
+C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.dll
+C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.xml

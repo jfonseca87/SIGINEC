@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bitacora.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteMostrar.cs" />
     <Compile Include="DetalleDispositivo.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Ingreso_Dispositivo.cs" />
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />
+    <Compile Include="Bitacora.cs" />
     <Compile Include="Solicitud_Dispositivo.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="ViewCerrarSolicitudDispositivo.cs" />
     <Compile Include="ViewDetSeguimiento.cs" />
+    <Compile Include="ViewDetSeguimientoBS.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSeguimientoBS.cs" />

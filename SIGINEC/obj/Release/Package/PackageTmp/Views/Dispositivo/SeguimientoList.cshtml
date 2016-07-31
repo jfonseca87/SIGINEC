@@ -1,0 +1,50 @@
+﻿
+@{
+    Model.Helpers.PagedData<Model.ViewDetSeguimiento> objeto = ViewBag.Datos;
+}
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>  </th>
+            <th> usuario </th>
+            <th> Seguimiento </th>
+            <th> Fecha Seguimiento </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var det in objeto.Data)
+        {
+            <tr>
+                <td> <i class="glyphicon glyphicon-hand-right"></i> </td>
+                <td> @Html.DisplayFor(d => det.UsuarioSeguimiento) </td>
+                <td> @Html.DisplayFor(d => det.Seguimiento)</td>
+                <td> @Html.DisplayFor(d => det.FechaSeguimiento) </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8" style="text-align:center;">
+                <ul class="pagination">
+                    @for (int i = 1; i <= objeto.NumberOfPages; i++)
+                    {
+                        if (i == objeto.CurrentPage)
+                        {
+                            <li class="active">
+                                <a class="page-detalle" href="javascript:void();">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="page-detalle" href="javascript:void();">@i</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<script src="~/Assets/js/Logic.js"></script>

@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot\SIGINEC</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Assets/css/bootstrap.css">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/css/bootstrap.min.css">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/css/shop-item.css">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/Images/imageIndex.jpg">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/Images/logoSIGINEC.jpg">
+      <publishTime>04/27/2016 11:55:21</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap.js">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap.min.js">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.js">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.validate.min.js">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.validate.unobtrusive.min.js">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Assets/js/Logic.js">
+      <publishTime>07/30/2016 20:19:52</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>04/27/2016 11:55:37</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>04/27/2016 11:55:36</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/27/2016 11:55:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>04/27/2016 11:55:40</publishTime>
+    </File>
+    <File Include="bin/Model.dll">
+      <publishTime>07/30/2016 16:31:32</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>04/27/2016 11:55:51</publishTime>
+    </File>
+    <File Include="bin/SIGINEC.dll">
+      <publishTime>07/30/2016 19:24:29</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>04/27/2016 11:55:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>04/27/2016 11:55:45</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>04/27/2016 11:55:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>04/27/2016 11:55:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>04/27/2016 11:55:39</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>04/27/2016 11:55:41</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>04/27/2016 11:55:45</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>04/27/2016 11:55:45</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>04/27/2016 11:55:45</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/27/2016 11:55:20</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/30/2016 19:23:14</publishTime>
+    </File>
+    <File Include="Views/Bitacora/detBitacora.cshtml">
+      <publishTime>07/22/2016 16:13:11</publishTime>
+    </File>
+    <File Include="Views/Bitacora/Index.cshtml">
+      <publishTime>07/22/2016 16:12:43</publishTime>
+    </File>
+    <File Include="Views/Bitacora/nuevaBitacora.cshtml">
+      <publishTime>07/30/2016 20:10:59</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/cerrarSolBS.cshtml">
+      <publishTime>07/22/2016 14:15:29</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/cerrarSolicitud.cshtml">
+      <publishTime>06/23/2016 16:24:54</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/crearSeguimientoBS.cshtml">
+      <publishTime>07/19/2016 16:25:25</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/DispositivoList.cshtml">
+      <publishTime>04/29/2016 16:20:27</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/Index.cshtml">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/IngDispositivo.cshtml">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/insertDispositivo.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/nuevaSolBajoStock.cshtml">
+      <publishTime>07/07/2016 16:23:42</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/nuevaSolicitud.cshtml">
+      <publishTime>06/22/2016 15:53:29</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/nuevoSeguimiento.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SeguimientoBSList.cshtml">
+      <publishTime>07/19/2016 16:55:32</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SeguimientoList.cshtml">
+      <publishTime>06/17/2016 12:07:41</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/seguimientoSolicitud.cshtml">
+      <publishTime>05/27/2016 15:53:57</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SeguimientoSolicitudBS.cshtml">
+      <publishTime>07/21/2016 10:52:29</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SolBajoStock.cshtml">
+      <publishTime>07/13/2016 15:56:24</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SolBajoStockList.cshtml">
+      <publishTime>07/19/2016 11:49:45</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/solDispositivo.cshtml">
+      <publishTime>06/24/2016 16:34:05</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/SolDispositivoList.cshtml">
+      <publishTime>07/19/2016 15:32:05</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/sumarCantidades.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Dispositivo/verDispositivo.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Home/Indexaf.cshtml">
+      <publishTime>04/27/2016 11:55:23</publishTime>
+    </File>
+    <File Include="Views/Home/Ingresar.cshtml">
+      <publishTime>06/23/2016 16:16:19</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>07/30/2016 19:42:27</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>04/27/2016 11:55:22</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/30/2016 19:24:29</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

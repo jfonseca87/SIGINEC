@@ -1,0 +1,60 @@
+﻿@model Model.Helpers.PagedData<Model.ViewSolicitudBajoStock>
+
+<table class="table table-hover table-striped table-responsive">
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Observaciones </th>
+            <th> Estado </th>
+            <th> Solicita </th>
+            <th> Responsable </th>
+            <th> Fecha Solicitud </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sol in Model.Data)
+        {
+            <tr>
+                <td> @Html.DisplayFor(s => sol.IdSolicitud) </td>
+                <td> @Html.DisplayFor(s => sol.Observaciones) </td>
+                <td> @Html.DisplayFor(s => sol.Estado) </td>
+                <td> @Html.DisplayFor(s => sol.UsuarioSol) </td>
+                <td> @Html.DisplayFor(s => sol.UsuarioResp) </td>
+                <td> @Html.DisplayFor(s => sol.FechaSol) </td>
+                <td style="text-align:right;">
+                    <button type="button" alt="Seguimiento" title="Seguimiento" class="btn btn-warning seguimientoBS" data-id="@sol.IdSolicitud">
+                        <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" alt="Cerrar Solicitud" title="Cerrar Solicitud" class="btn btn-danger cerrarSolicitudBS" data-id="@sol.IdSolicitud">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8" style="text-align:center;">
+                <ul class="pagination">
+                    @for (int i = 1; i <= Model.NumberOfPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <li class="active">
+                                <a class="page-solicitudBS" href="javascript:void();">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="page-solicitudBS" href="javascript:void();">@i</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script src="~/Assets/js/Logic.js"></script>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+}
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li> 
+    }
+}
+
+<div class="jumbotron text-center">
+    <h2> Bienvenido a SIGINEC @Session["Nombres"] </h2>
+</div>
+

@@ -179,7 +179,7 @@ CREATE TABLE Bitacora
 (
 	Id_Bitacora int identity(1,1) primary key,
 	Id_Dispositivo int,
-	Estado_Dispositivo int,
+	Id_Estado_Dispositivo int,
 	Detalles_Revision varchar(max),
 	Observaciones varchar(max),
 	Usuario_Registra int,

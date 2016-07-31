@@ -1,0 +1,39 @@
+﻿@model Model.ViewCerrarSolicitudDispositivo
+
+@{
+    ViewBag.Title = "cerrarSolicitud";
+    Layout = null;
+}
+
+@{Html.BeginForm("cerrarSolBS", "Dispositivo", FormMethod.Post);}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" style="text-align:center;">
+        Cerrar Solicitud Bajo Stock
+        <i class="glyphicon glyphicon-remove"></i>
+    </h4>
+</div>
+<div class="modal-body">
+    <h4> Va a cerrar la Solicitud de Bajo Stock # <b> @ViewBag.Id </b> </h4>
+    <br />
+    <div class="form-group">
+        <label> Observaciones: </label>
+        @Html.TextAreaFor(s => s.Observaciones, new { @class = "form-control", @placeholder = "Observaciones" })
+    </div>
+    <div class="form-group">
+        <label> Se resuelve la solicitud: </label>
+        @Html.DropDownListFor(s => s.ResuelveSolicitud, new SelectList(new[] { new SelectListItem { Value = "1", Text = "SI" }, new SelectListItem { Value = "0", Text = "NO" } }, "Value", "Text"), "Seleccione...", new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="color:red;">
+        @Html.ValidationSummary(false, "")
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-danger" id="Entrar"> Cerrar </button>
+</div>
+@{Html.EndForm();}
+
+@* Scripts *@
+<script src="~/Assets/js/jquery.validate.min.js"></script>
+<script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>

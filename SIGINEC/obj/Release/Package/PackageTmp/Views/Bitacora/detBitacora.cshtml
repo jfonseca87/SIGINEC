@@ -1,0 +1,40 @@
+﻿@model Model.Helpers.PagedData<Model.Bitacora>
+@{
+    ViewBag.Title = "Bitacoras";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Bitacora")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Bitacora")
+        {
+            <a href="~/Bitacora/detBitacora" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Bitacoras <i class="glyphicon glyphicon-list-alt"></i> </h2>
+</div>
+<div>
+    <button class="btn btn-primary" id="nuevaBitacora"> Nueva Bitacora </button>
+</div>
+<br />
+<hr />
+<br />
+<div id="dispositivo-list" class="container col-xs-12">
+    @*@Html.Partial("BitacoraList")*@
+</div>

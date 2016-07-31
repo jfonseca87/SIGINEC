@@ -1,0 +1,81 @@
+﻿@model Model.Dispositivo
+
+@{
+    ViewBag.Title = "insertDispositivo";
+    Layout = null;
+}
+
+@{Html.BeginForm("insertDispositivo", "Dispositivo", FormMethod.Post);}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @if (Model.Id_Dispositivo == 0)
+        {
+            <h4 class="modal-title" style="text-align:center;">
+                Nuevo Dispositivo
+                <i class="glyphicon glyphicon-plus"></i>
+            </h4>
+        }
+        else
+        {
+            <h4 class="modal-title" style="text-align:center;">
+                Editar Dispositivo
+                <i class="glyphicon glyphicon-pencil"></i>
+            </h4>
+        }
+        
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(d => d.Id_Dispositivo)
+        <div class="form-group">
+            <label> Nombre: </label>
+            @Html.TextBoxFor(d => d.Nombre, new { @class = "form-control", @placeholder = "Nombre Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Clase: </label>
+            @Html.TextBoxFor(d => d.Clase, new { @class = "form-control", @placeholder = "Clase Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Marca: </label>
+            @Html.TextBoxFor(d => d.Marca, new { @class = "form-control", @placeholder = "Marca Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Clase: </label>
+            @Html.TextBoxFor(d => d.Clase, new { @class = "form-control", @placeholder = "Clase Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Modelo: </label>
+            @Html.TextBoxFor(d => d.Modelo, new { @class = "form-control", @placeholder = "Modelo Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Caracteristicas: </label>
+            @Html.TextAreaFor(d => d.Caracteristicas, new { @class = "form-control", @placeholder = "Caracteristicas Dispositivo" })
+        </div>
+        <div class="form-group">
+            <label> Configuración: </label>
+            @Html.TextAreaFor(d => d.Configuracion, new { @class = "form-control", @placeholder = "Configuración Dispositivo" })
+        </div>
+        @if (Model.Id_Dispositivo == 0)
+        {
+            <div class="form-group">
+                <label> Cantidad: </label>
+                @Html.TextBoxFor(d => d.Cantidad, new { @class = "form-control", @placeholder = "Cantidad" })
+            </div>
+        }
+        else 
+        {
+            @Html.HiddenFor(d => d.Cantidad) 
+        }
+        
+        <div class="form-group" style="color:red;">
+            @Html.ValidationSummary(false, "")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="Entrar">@(Model.Id_Dispositivo > 0 ? "Editar" : "Insertar")</button>
+    </div>
+@{Html.EndForm();}
+
+@* Scripts *@
+<script src="~/Assets/js/jquery.validate.min.js"></script>
+<script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>

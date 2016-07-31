@@ -44,7 +44,7 @@ namespace Model
 
             modelBuilder.Entity<Dispositivo>()
                 .HasMany(e => e.Bitacora)
-                .WithOptional(e => e.Dispositivo)
+                .WithRequired(e => e.Dispositivo)
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Dispositivo>()
@@ -64,8 +64,8 @@ namespace Model
 
             modelBuilder.Entity<Estado_Dispositivo>()
                 .HasMany(e => e.Bitacora)
-                .WithOptional(e => e.Estado_Dispositivo1)
-                .HasForeignKey(e => e.Estado_Dispositivo)
+                .WithRequired(e => e.Estado_Dispositivo)
+                .HasForeignKey(e => e.Id_Estado_Dispositivo)
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Estados_Op>()
@@ -135,10 +135,11 @@ namespace Model
                 .HasForeignKey(e => e.Usuario_Seguimiento)
                 .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<Usuario>()
-            //    .HasMany(e => e.Seguimiento_BajoStock)
-            //    .WithOptional(e => e.Usuario)
-            //    .HasForeignKey(e => e.Usuario_Seguimiento);
+            modelBuilder.Entity<Usuario>()
+                .HasMany(e => e.Seguimiento_BajoStock)
+                .WithRequired(e => e.Usuario)
+                .HasForeignKey(e => e.Usuario_Seguimiento)
+                .WillCascadeOnDelete(false);
         }
     }
 }
