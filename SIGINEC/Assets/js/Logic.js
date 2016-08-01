@@ -253,7 +253,7 @@
                 $("#contenedor").empty();
                 $.each(data, function (i, item) {
                     $("#contenedor").append(
-                        '<button type="button" class="list-group-item list-group-item-info" id="elimina-item">'+ item.Fotografia +'</button>'
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.Fotografia + '<button type="button" class="close" data-text="'+ item.Fotografia +'"><span aria-hidden="true">&times;</span></button></li>'
                     );
                 });
             },
@@ -263,8 +263,25 @@
         });
     });
 
-    $("#contenedor button:first").click(function () {
-        debugger
+    $("#contenedor").on("click", "button", function () {
         alert("Vas a borrar algo... be careful...");
+
+        $.ajax({
+            url: url + "/bitacora/eliminaregistro",
+            data: { adjunto: $(this).data("text") },
+            method: "POST",
+            datatype: "json",
+            success: function (data) {
+                $("#contenedor").empty();
+                $.each(data, function (i, item) {
+                    $("#contenedor").append(
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.Fotografia + '<button type="button" class="close" data-text="' + item.Fotografia + '"><span aria-hidden="true">&times;</span></button></li>'
+                    );
+                });
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
     });
 });

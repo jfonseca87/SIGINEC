@@ -62,6 +62,13 @@ namespace SIGINEC.Controllers
                 return Json(Adjuntos, JsonRequestBehavior.AllowGet);
             }
 
+            [HttpPost]
+            public JsonResult eliminaRegistro(string adjunto)
+            {
+                Adjuntos.RemoveAll(a => a.Fotografia == adjunto);
+                return Json(Adjuntos, JsonRequestBehavior.AllowGet);
+            }
+
         #endregion
 
     }
