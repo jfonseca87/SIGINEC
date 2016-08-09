@@ -116,6 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuxiliaryFiles\AlmacenaAdjunto.cs" />
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\DispositivoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

@@ -18,5 +18,19 @@ namespace Model
         public int? Id_Bitacora { get; set; }
 
         public Bitacora Bitacora { get; set; }
+
+        public void Guardar() {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

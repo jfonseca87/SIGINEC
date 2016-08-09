@@ -15,7 +15,7 @@
         <i class="glyphicon glyphicon-plus"></i>
    </h4>
 </div>
-@{Html.BeginForm("nuevaBitacora", "Bitacora", FormMethod.Post, new { @enctype = "multipart/form-data" });}
+@{Html.BeginForm("nuevaBitacora", "Bitacora", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "UploadAjax" });}
 <div class="modal-body">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -49,20 +49,19 @@
         <div role="tabpanel" class="tab-pane" id="adjuntos">
             <br /><br />
             <label class="btn btn-danger">
-                Seleccionar... <input type="file" style="display:none;" id="adjunto" />
+                Seleccionar... <b><i class="glyphicon glyphicon-folder-open"></i></b> <input type="file" style="display:none;" id="adjunto" name="adjunto" />
             </label>
             <br />
             <br />
             <div class="container-fluid">
-                <ul class="list-group col-xs-12" id="contenedor">
-                </ul>
+                <ul class="list-group col-xs-12" id="contenedor"></ul>
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-    <button type="submit" class="btn btn-primary" id="Entrar"> Crear Bitacora </button>
+    <button type="button" class="btn btn-primary" id="guardarNueva"> Crear Bitacora </button>
 </div>
 @{Html.EndForm();}
 

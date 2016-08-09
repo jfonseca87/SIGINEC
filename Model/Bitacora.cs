@@ -40,5 +40,20 @@ namespace Model
         public virtual Usuario Usuario { get; set; }
 
         public virtual ICollection<Detalle_Bitacora> Detalle_Bitacora { get; set; }
+
+        public void Guardar() {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

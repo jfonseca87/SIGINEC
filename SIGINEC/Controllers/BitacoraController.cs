@@ -1,4 +1,5 @@
 ﻿using Model;
+using SIGINEC.AuxiliaryFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace SIGINEC.Controllers
             Menu2 menu2 = new Menu2();
             Dispositivo dispositivo = new Dispositivo();
             Estado_Dispositivo estDispositivo = new Estado_Dispositivo();
-            static List<Detalle_Bitacora> Adjuntos = new List<Detalle_Bitacora>();
+            Bitacora bitacora = new Bitacora();
+            Detalle_Bitacora detaBitacora = new Detalle_Bitacora();
+            AlmacenaAdjunto almAdjunto = new AlmacenaAdjunto();
+            static List<HttpPostedFileBase> Adjuntos = new List<HttpPostedFileBase>();
+            static List<infAdjunto> AdjuntosString = new List<infAdjunto>();
         #endregion
 
         //Index Pagina Bitacoras Principal
@@ -38,6 +43,7 @@ namespace SIGINEC.Controllers
                 ViewBag.Dispositivos = dispositivo.listarDispositivoDropDown();
                 ViewBag.EstadosDisp = estDispositivo.ListarEstadosDropDown();
                 Adjuntos.Clear();
+                AdjuntosString.Clear();
                 return View();
             }
 
@@ -46,6 +52,12 @@ namespace SIGINEC.Controllers
             {
                 if (ModelState.IsValid == true)
                 {
+
+                    foreach (var item in Adjuntos)
+                    {
+                        almAdjunto.saveFile(1, item);
+                    }
+
                     return RedirectToAction("detBitacora");
                 }
                 else
@@ -55,18 +67,24 @@ namespace SIGINEC.Controllers
             }
 
             [HttpPost]
-            public JsonResult listAdjuntos(Detalle_Bitacora detBitacora)
+            public void listAdjuntos(HttpPostedFileBase adjunto)
             {
-                Adjuntos.Add(detBitacora);
+                Adjuntos.Add(adjunto);
+                AdjuntosString.Add(new infAdjunto { NomArchivo = adjunto.FileName, PesoArchivo = (adjunto.ContentLength / 1000).ToString()});
+            }
 
-                return Json(Adjuntos, JsonRequestBehavior.AllowGet);
+            public JsonResult listarAdjuntos()
+            {
+                return Json(AdjuntosString, JsonRequestBehavior.AllowGet);
             }
 
             [HttpPost]
             public JsonResult eliminaRegistro(string adjunto)
             {
-                Adjuntos.RemoveAll(a => a.Fotografia == adjunto);
-                return Json(Adjuntos, JsonRequestBehavior.AllowGet);
+                Adjuntos.RemoveAll(a => a.FileName == adjunto);
+                AdjuntosString.RemoveAll(a => a.NomArchivo == adjunto);
+
+                return Json(AdjuntosString, JsonRequestBehavior.AllowGet);
             }
 
         #endregion

@@ -2,6 +2,7 @@
 
     //var url = "http://192.168.0.20/siginec";
     var url = "http://localhost:49240/";
+    var guardaBitacora = 0;
 
     $("#LogIn").click(function () {
         $("#modal1").modal();
@@ -241,19 +242,17 @@
 
     $("#adjunto").change(function () {
 
+        $("#UploadAjax").submit();
+        
         $.ajax({
-            url: url + "/Bitacora/listAdjuntos",
-            data:
-            {
-                Fotografia : $(this).val()
-            },
+            url: url + "/Bitacora/listarAdjuntos",
             method: "POST",
             datatype: "json",
             success: function (data) {
                 $("#contenedor").empty();
                 $.each(data, function (i, item) {
                     $("#contenedor").append(
-                        '<li type="button" class="list-group-item list-group-item-info">' + item.Fotografia + '<button type="button" class="close" data-text="'+ item.Fotografia +'"><span aria-hidden="true">&times;</span></button></li>'
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.NomArchivo +' ('+ item.PesoArchivo +' KB) <button type="button" class="close" data-text="'+ item.NomArchivo +'"><span aria-hidden="true">&times;</span></button></li>'
                     );
                 });
             },
@@ -275,7 +274,7 @@
                 $("#contenedor").empty();
                 $.each(data, function (i, item) {
                     $("#contenedor").append(
-                        '<li type="button" class="list-group-item list-group-item-info">' + item.Fotografia + '<button type="button" class="close" data-text="' + item.Fotografia + '"><span aria-hidden="true">&times;</span></button></li>'
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.NomArchivo + ' (' + item.PesoArchivo + ' KB) <button type="button" class="close" data-text="' + item.NomArchivo + '"><span aria-hidden="true">&times;</span></button></li>'
                     );
                 });
             },
@@ -283,5 +282,45 @@
                 alert("Ha ocurrido un error gravisimo!!!")
             }
         });
+    });
+
+    $("#guardarNueva").click(function () {
+
+        guardaBitacora = 1;
+
+        $("#UploadAjax").submit();
+
+    });
+
+    $("#UploadAjax").on("submit", function (e) {
+
+        debugger
+        if (guardaBitacora == 1) {
+
+            var Datos = $("#UploadAjax").serialize();
+
+            $.ajax({
+                url: url + "/bitacora/nuevaBitacora",
+                data: Datos,
+                method: "POST"
+            });
+
+        }
+        else
+        {
+            e.preventDefault();
+
+            var formdata = new FormData(document.getElementById("UploadAjax"));
+
+            $.ajax({
+                url: url + "/bitacora/listAdjuntos",
+                type: "POST",
+                datatype: "html",
+                data: formdata,
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        }
     });
 });

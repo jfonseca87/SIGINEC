@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,7 @@
     <Compile Include="Helpers\MD5Convert.cs" />
     <Compile Include="Helpers\PagedData.cs" />
     <Compile Include="Helpers\RecortaTexto.cs" />
+    <Compile Include="infAdjunto.cs" />
     <Compile Include="Ingreso_Dispositivo.cs" />
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />
