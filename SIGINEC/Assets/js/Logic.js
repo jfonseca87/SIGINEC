@@ -294,7 +294,6 @@
 
     $("#UploadAjax").on("submit", function (e) {
 
-        debugger
         if (guardaBitacora == 1) {
 
             var Datos = $("#UploadAjax").serialize();
@@ -322,5 +321,48 @@
                 processData: false
             })
         }
+    });
+
+    $(".page-bitacora").click(function () {
+
+        var page = parseInt($(this).html());
+
+        $("#bitacora-list").load(url + "/Bitacora/BitacoraList/" + page);
+    });
+
+    $(".detBitacora").click(function () {
+        location.href = url + "/bitacora/detalleBitacora/" + $(this).data("id");
+    });
+
+    $("#verImagenes").click(function () {
+        
+        var cont = 0;
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Bitacora/traeImagenes/" + $(this).data("id"));
+
+        $.ajax({
+            url: url + "/Bitacora/conImagenes/" + $(this).data("id"),
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    var ruta = url + "/BitacoraImagenes/" + item.Id_Bitacora + "/" + item.Fotografia;
+                    if (cont == 0) {
+                        $(".carousel-inner").append(
+                            '<div class="item active"><img src="' + ruta + '" width="600px" /></div>'
+                         );
+                    } else
+                    {
+                        $(".carousel-inner").append(
+                            '<div class="item"><img src="' + ruta + '" width="600px" /></div>'
+                         );
+                    }
+                    cont += 1;
+                });
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
     });
 });

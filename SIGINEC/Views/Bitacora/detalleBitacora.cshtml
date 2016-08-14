@@ -1,0 +1,51 @@
+﻿@model Model.ViewDetBitacora
+
+@{
+    ViewBag.Title = "Bitacora # " + Model.Id_Bitacora;
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Bitacora")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Bitacora")
+        {
+            <a href="~/Bitacora/detBitacora" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+
+<div class="jumbotron" style="text-align:center;">
+    <h2> Bitacora # @Model.Id_Bitacora <i class="glyphicon glyphicon-list-alt"></i> </h2>
+</div>
+
+@Html.HiddenFor(b => b.Id_Bitacora)
+
+<div class="list-group">
+    <button type="button" class="list-group-item"> <b>Dispositivo: </b> @Html.DisplayFor(b => b.Dispositivo) </button>
+    <button type="button" class="list-group-item"> <b>Estado: </b> @Html.DisplayFor(b => b.Estado)</button>
+    <button type="button" class="list-group-item"> <b>Detalles Revisión: </b> @Html.DisplayFor(b => b.Detalles_Revision) </button>
+    <button type="button" class="list-group-item"> <b>Observaciones: </b> @Html.DisplayFor(b => b.Observaciones)</button>
+    <button type="button" class="list-group-item"> <b>Usuario Registra: </b> @Html.DisplayFor(b => b.Usuario_Registra)</button>
+    <button type="button" class="list-group-item"> <b>Fecha Registra: </b> @Html.DisplayFor(b => b.Fecha_Registra)</button>
+</div>
+<hr />
+<div>
+    <button class="btn btn-success" id="verImagenes" data-id="@Model.Id_Bitacora"> Ver Imágenes </button>
+</div>
+

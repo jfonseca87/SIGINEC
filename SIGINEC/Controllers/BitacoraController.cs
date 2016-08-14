@@ -11,6 +11,7 @@ namespace SIGINEC.Controllers
     public class BitacoraController : Controller
     {
         #region Variables y Objetos
+            public const int PageSize = 2;
             Menu1 menu = new Menu1();
             Menu2 menu2 = new Menu2();
             Dispositivo dispositivo = new Dispositivo();
@@ -35,7 +36,12 @@ namespace SIGINEC.Controllers
             {
                 ViewBag.Menu1 = menu.listaMenu1();
                 ViewBag.Menu2 = menu2.listarMenu2(2);
-                return View();
+                return View(bitacora.listarBitacora(PageSize, 1));
+            }
+
+            public ActionResult BitacoraList(int id)
+            {
+                return PartialView(bitacora.listarBitacora(PageSize, id));
             }
 
             public ActionResult nuevaBitacora()
@@ -50,12 +56,29 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult nuevaBitacora(Bitacora bitacora)
             {
+                int Id_Bitacora = 0;
+
                 if (ModelState.IsValid == true)
                 {
+                    bitacora.Usuario_Registra = Convert.ToInt16(Session["IdUsuario"]);
+                    bitacora.Fecha_Registro = System.DateTime.Now;
+                    bitacora.Guardar();
+                    Id_Bitacora = bitacora.TraeIdBitacora(Convert.ToInt16(Session["IdUsuario"]));
 
-                    foreach (var item in Adjuntos)
+                    if (bitacora.Id_Estado_Dispositivo == 1)
                     {
-                        almAdjunto.saveFile(1, item);
+                        dispositivo.SumarUnidades(bitacora.Id_Dispositivo, 1);
+                    }
+
+                    if (Adjuntos.Count != 0)
+                    {
+                        foreach (var item in Adjuntos)
+                        {
+                            detaBitacora.Fotografia = item.FileName;
+                            detaBitacora.Id_Bitacora = Id_Bitacora;
+                            detaBitacora.Guardar();
+                            almAdjunto.saveFile(Id_Bitacora, item);
+                        }
                     }
 
                     return RedirectToAction("detBitacora");
@@ -85,6 +108,26 @@ namespace SIGINEC.Controllers
                 AdjuntosString.RemoveAll(a => a.NomArchivo == adjunto);
 
                 return Json(AdjuntosString, JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult detalleBitacora(int id)
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(2);
+                return View( bitacora.traeBitacora(id) );
+            }
+
+            [HttpPost]
+            public JsonResult conImagenes(int id)
+            {
+                List<Detalle_Bitacora> lstImagenes = detaBitacora.traeImagenes(id);
+                return Json(lstImagenes, JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult traeImagenes(int id)
+            {
+                ViewBag.Id = id;
+                return View(detaBitacora.traeImagenes(id));
             }
 
         #endregion

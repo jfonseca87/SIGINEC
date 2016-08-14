@@ -1,4 +1,4 @@
-﻿@model Model.Helpers.PagedData<Model.Bitacora>
+﻿@model Model.Helpers.PagedData<Model.ViewListBitacora>
 @{
     ViewBag.Title = "Bitacoras";
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
@@ -35,6 +35,6 @@
 <br />
 <hr />
 <br />
-<div id="dispositivo-list" class="container col-xs-12">
-    @*@Html.Partial("BitacoraList")*@
+<div id="bitacora-list" class="container col-xs-12">
+    @Html.Partial("BitacoraList")
 </div>

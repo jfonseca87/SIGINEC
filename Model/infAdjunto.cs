@@ -10,5 +10,6 @@ namespace Model
     {
         public string NomArchivo { get; set; }
         public string PesoArchivo { get; set; }
+        public string RutaArchivo { get; set; }
     }
 }

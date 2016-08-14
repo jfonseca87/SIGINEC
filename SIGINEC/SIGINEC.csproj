@@ -258,6 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Prueba.pubxml" />
+    <Content Include="Views\Bitacora\BitacoraList.cshtml" />
+    <Content Include="Views\Bitacora\detalleBitacora.cshtml" />
+    <Content Include="Views\Bitacora\traeImagenes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
