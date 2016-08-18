@@ -224,4 +224,15 @@ create table Menu2
 	foreign key (id_Menu1) references Menu1(id_Menu1)
 )
 
+GO
+
+CREATE TABLE Administracion
+(
+	Id_Admin int primary key identity(1,1),
+	Resp_Bodega int,
+	Resp_BajoStock int,
+	foreign key (Resp_Bodega) references Usuario(Id_Usuario),
+	foreign key (Resp_BajoStock) references Usuario(Id_Usuario)
+)
+
 

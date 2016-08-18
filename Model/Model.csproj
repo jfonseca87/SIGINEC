@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteMostrar.cs" />
     <Compile Include="DetalleDispositivo.cs" />

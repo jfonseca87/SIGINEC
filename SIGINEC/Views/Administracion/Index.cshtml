@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Administración";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+}
+
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Administracion")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Personas")
+        {
+            <a href="~/Administracion/Personas" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Usuarios")
+        {
+            <a href="~/Administracion/Usuarios" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Clientes")
+        {
+            <a href="~/Administracion/Clientes" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Responsables")
+        {
+            <a href="~/Administracion/Responsables" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Administración <i class="glyphicon glyphicon-briefcase"></i> </h2>
+</div>
+<div class="caption-full">
+    <h1> Que puedo hacer? </h1>
+    <p>
+        En el módulo de <b> ADMINISTRACION </b> de <b> SIGINEC (Sistema Integrado de Gestión de NEC) </b> puedes realizar las siguientes actividades
+    </p>
+    <br />
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <b>Personas</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    En la opción de <b>Personas</b> podrás crear todas las personas que van a intervenir en la operación de <b>SIGINEC</b> y en las siguientes opciones podrás crear usuarios o clientes según sea la necesidad.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <b>Usuarios</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    En la opción de <b>Usuarios</b> podrás crear todos los usuarios que van a intervenir en la operación de <b>SIGINEC</b> como perfiles podrás crear usuarios administradores los cuales podrán acceder al modulo de administración y usuarios los cuales accederán a los módulos de producción.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <b>Clientes</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    En la opción de <b>Clientes</b> podrás crear todos los clientes que van a intervenir en la operación de <b>SIGINEC</b>, estos clientes servirán como insumo para las solicitudes de dispositivos
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                        <b>Responsables</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                    En la opción de <b>Responsables</b> se establecerán los usuarios a los cuales les llegaran las notificaciones cuando se realice una solicitud de Dispositivos o una solicitud cuando el Stock este bajo
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

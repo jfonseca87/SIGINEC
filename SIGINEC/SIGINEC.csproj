@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuxiliaryFiles\AlmacenaAdjunto.cs" />
+    <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\DispositivoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -261,6 +262,7 @@
     <Content Include="Views\Bitacora\BitacoraList.cshtml" />
     <Content Include="Views\Bitacora\detalleBitacora.cshtml" />
     <Content Include="Views\Bitacora\traeImagenes.cshtml" />
+    <Content Include="Views\Administracion\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

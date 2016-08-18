@@ -32,8 +32,10 @@ insert into Menu2 (subpagina, activa, id_Menu1) values ('Solicitud Dispositivo',
 insert into Menu2 (subpagina, activa, id_Menu1) values ('Solicitud BajoStock', 1, 1)
 insert into Menu2 (subpagina, activa, id_Menu1) values
 ('Bitacora', 1, 2)
-insert into Menu2 (subpagina, activa, id_Menu1) values ('Persona', 1, 3)
-insert into Menu2 (subpagina, activa, id_Menu1) values ('Configuración', 1, 3)
+insert into Menu2 (subPagina, activa, id_Menu1) values ('Personas', 1, 3)
+insert into Menu2 (subPagina, activa, id_Menu1) values ('Usuarios', 1, 3)
+insert into Menu2 (subPagina, activa, id_Menu1) values ('Clientes', 1, 3)
+insert into Menu2 (subPagina, activa, id_Menu1) values ('Responsables', 1, 3)
 insert into Menu2 (subpagina, activa, id_Menu1) values ('Ingreso Dispositivo', 1, 4)
 insert into Menu2 (subpagina, activa, id_Menu1) values ('Solicitudes Dispositivo', 1, 4)
 insert into Menu2 (subpagina, activa, id_Menu1) values ('Solicitudes BajoStock', 1, 4)

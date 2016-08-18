@@ -345,20 +345,31 @@
             type: "POST",
             datatype: "json",
             success: function (data) {
-                $.each(data, function (i, item) {
-                    var ruta = url + "/BitacoraImagenes/" + item.Id_Bitacora + "/" + item.Fotografia;
-                    if (cont == 0) {
-                        $(".carousel-inner").append(
-                            '<div class="item active"><img src="' + ruta + '" width="600px" /></div>'
-                         );
-                    } else
-                    {
-                        $(".carousel-inner").append(
-                            '<div class="item"><img src="' + ruta + '" width="600px" /></div>'
-                         );
-                    }
-                    cont += 1;
-                });
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        var ruta = url + "/BitacoraImagenes/" + item.Id_Bitacora + "/" + item.Fotografia;
+                        if (cont == 0) {
+                            $(".carousel-inner").append(
+                                '<div class="item active"><img src="' + ruta + '" width="600px" /></div>'
+                             );
+                        } else {
+                            $(".carousel-inner").append(
+                                '<div class="item"><img src="' + ruta + '" width="600px" /></div>'
+                             );
+                        }
+                        cont += 1;
+                    });
+                } else
+                {
+                    $(".contImagenes").empty();
+                    $(".contImagenes").append(
+                        '<h4>No se cargaron imágenes para la bitacora No. <b>' + $("#verImagenes").data("id") + '</b></h4>'
+                    );
+                    $(".imagenFooter").append(
+                        '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>'
+                    );
+                }
+
             },
             fail: function (mensaje) {
                 alert("Ha ocurrido un error gravisimo!!!")

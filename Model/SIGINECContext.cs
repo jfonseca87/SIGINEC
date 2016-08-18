@@ -28,6 +28,7 @@ namespace Model
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Menu1> Menu1 { get; set; }
         public DbSet<Menu2> Menu2 { get; set; }
+        public DbSet<Administracion> Administracion { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -106,6 +107,16 @@ namespace Model
                 .WithOptional(e => e.Solicitud_Dispositivo)
                 .HasForeignKey(e => e.Id_SolicitudDisp)
                 .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Usuario>()
+                .HasMany(e => e.Administracion)
+                .WithOptional(e => e.Usuario)
+                .HasForeignKey(e => e.Resp_Bodega);
+
+            modelBuilder.Entity<Usuario>()
+               .HasMany(e => e.Administracion)
+               .WithOptional(e => e.Usuario)
+               .HasForeignKey(e => e.Resp_BajoStock);
 
             modelBuilder.Entity<Usuario>()
                 .HasMany(e => e.Bitacora)

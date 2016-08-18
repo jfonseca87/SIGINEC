@@ -19,6 +19,7 @@ namespace Model
             Solicitud_Dispositivo = new List<Solicitud_Dispositivo>();
             Seguimiento_SolDispositivo = new List<Seguimiento_SolDispositivo>();
             Seguimiento_BajoStock = new List<Seguimiento_BajoStock>();
+            Administracion = new List<Administracion>();
         }
 
         [Key]
@@ -51,6 +52,8 @@ namespace Model
         public ICollection<Seguimiento_SolDispositivo> Seguimiento_SolDispositivo { get; set; }
 
         public ICollection<Seguimiento_BajoStock> Seguimiento_BajoStock { get; set; }
+
+        public ICollection<Administracion> Administracion { get; set; }
 
         public SesionUsuario LogInUsuario(string user, string password)
         {
