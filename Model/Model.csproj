@@ -84,11 +84,13 @@
     <Compile Include="ViewDetSeguimientoBS.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="ViewListBitacora.cs" />
+    <Compile Include="ViewListUsuario.cs" />
     <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSeguimientoBS.cs" />
     <Compile Include="ViewSolBajoStock.cs" />
     <Compile Include="ViewSolicitudBajoStock.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />
+    <Compile Include="ViewUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

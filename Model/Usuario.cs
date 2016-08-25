@@ -25,11 +25,11 @@ namespace Model
         [Key]
         public int Id_Usuario { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Debe ingresar el Nick del usuario")]
         [StringLength(50)]
         public string Nick_usuario { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Debe ingresar una contraseña")]
         [StringLength(32)]
         public string Password_Usuario { get; set; }
 
@@ -75,6 +75,95 @@ namespace Model
             }
 
             return sUsuario;
+        }
+
+        public void GuardarUsuario()
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DesactivaUsuario(int id)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = (from u in context.Usuario
+                               where u.Id_Usuario == id
+                               select u).FirstOrDefault();
+
+                    usuario.Activo = 0;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex )
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public PagedData<ViewListUsuario> listarUsuarios(int PageSize, int CurrentPage)
+        {
+            var lstUsuario = new PagedData<ViewListUsuario>();
+
+            using (var context = new SIGINECContext())
+            {
+                try
+                {
+                    if (CurrentPage > 1)
+                    {
+                        lstUsuario.Data = (from u in context.Usuario
+                                           where u.Activo == 1
+                                           orderby u.Id_Usuario
+                                           select new ViewListUsuario 
+                                           {
+                                               Id_Usuario = u.Id_Usuario,
+                                               Num_Documento = u.Persona.Numero_Documento,
+                                               Nombres = u.Persona.Nombre_1 +" "+ u.Persona.Apellido_1,
+                                               NickName = u.Nick_usuario,
+                                               Tipo_Usuario = u.Tipo_Usuario
+                                           }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
+
+                    }
+                    else
+                    {
+                        lstUsuario.Data = (from u in context.Usuario
+                                           where u.Activo == 1
+                                           orderby u.Id_Usuario
+                                           select new ViewListUsuario
+                                           {
+                                               Id_Usuario = u.Id_Usuario,
+                                               Num_Documento = u.Persona.Numero_Documento,
+                                               Nombres = u.Persona.Nombre_1 + " " + u.Persona.Apellido_1,
+                                               NickName = u.Nick_usuario,
+                                               Tipo_Usuario = u.Tipo_Usuario
+                                           }).Take(PageSize).ToList();
+
+                    }
+
+                    lstUsuario.NumberOfPages = Convert.ToInt32(Math.Ceiling((double)context.Usuario.Where(u => u.Activo == 1).Count() / PageSize));
+                    lstUsuario.CurrentPage = CurrentPage;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+            return lstUsuario;
         }
         
     }

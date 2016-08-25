@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model.Helpers
 {
-    class MD5Convert
+    public class MD5Convert
     {
         StringBuilder sBuilder = new StringBuilder();
 

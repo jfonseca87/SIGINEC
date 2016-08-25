@@ -15,8 +15,10 @@ CREATE TABLE Persona
 	Nombre_2 varchar(50),
 	Apellido_1 varchar(50) not null,
 	Apellido_2 varchar(50),
+	Nombres_Mostrar varchar(200),
 	Email varchar(100) not null,
-	Cargo varchar(100) 
+	Cargo varchar(100),
+	Asignado int not null default 0
 )
 
 GO
@@ -26,7 +28,7 @@ CREATE TABLE Usuario
 	Id_Usuario int identity(1,1) primary key,
 	Nick_usuario varchar(50)not null,
 	Password_Usuario varchar(32)not null,
-	Activo int, 
+	Activo int default 1, 
 	Tipo_Usuario varchar(3),
 	Id_Persona int,
 	foreign key (Id_Persona) references Persona(Id_Persona)

@@ -121,6 +121,8 @@
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\DispositivoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +265,13 @@
     <Content Include="Views\Bitacora\detalleBitacora.cshtml" />
     <Content Include="Views\Bitacora\traeImagenes.cshtml" />
     <Content Include="Views\Administracion\Index.cshtml" />
+    <Content Include="Views\Persona\Index.cshtml" />
+    <Content Include="Views\Persona\PersonasList.cshtml" />
+    <Content Include="Views\Persona\nuevaPersona.cshtml" />
+    <Content Include="Views\Usuario\UsuarioList.cshtml" />
+    <Content Include="Views\Usuario\nuevoUsuario.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Persona\editaPersona.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -376,4 +376,19 @@
             }
         });
     });
+
+    $("#nuevaPersona").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Persona/nuevaPersona");
+    });
+
+    $(".editaPersona").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Persona/editaPersona/" + $(this).data("id"));
+    });
+
+    $("#nuevoUsuario").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/nuevoUsuario");
+    });
 });
