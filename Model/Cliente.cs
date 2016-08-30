@@ -1,5 +1,6 @@
 namespace Model
 {
+    using Model.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -57,6 +58,111 @@ namespace Model
             }
 
             return cliente;
+        }
+
+        public PagedData<ViewListCliente> listarClientes(int PageSize, int CurrentPage)
+        {
+            var lstCliente = new PagedData<ViewListCliente>();
+
+            using (var context = new SIGINECContext())
+            {
+                try
+                {
+                    if (CurrentPage > 1)
+                    {
+                        lstCliente.Data = (from c in context.Cliente
+                                           where c.Activo == 1
+                                           orderby c.Id_Cliente
+                                           select new ViewListCliente
+                                           {
+                                               Id_Cliente = c.Id_Cliente,
+                                               Identificacion = c.Persona.Numero_Documento,
+                                               Nombres = c.Persona.Nombres_Mostrar,
+                                               Direccion = c.Direccion,
+                                               Telefono = c.Telefono
+                                           }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
+
+                    }
+                    else
+                    {
+                        lstCliente.Data = (from c in context.Cliente
+                                           where c.Activo == 1
+                                           orderby c.Id_Cliente
+                                           select new ViewListCliente
+                                           {
+                                               Id_Cliente = c.Id_Cliente,
+                                               Identificacion = c.Persona.Numero_Documento,
+                                               Nombres = c.Persona.Nombres_Mostrar,
+                                               Direccion = c.Direccion,
+                                               Telefono = c.Telefono
+                                           }).Take(PageSize).ToList();
+
+                    }
+
+                    lstCliente.NumberOfPages = Convert.ToInt32(Math.Ceiling((double)context.Cliente.Where(c => c.Activo == 1).Count() / PageSize));
+                    lstCliente.CurrentPage = CurrentPage;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+            return lstCliente;
+        }
+
+        public void GuardaCliente()
+        {
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    context.Entry(this).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Cliente consCliente(int id)
+        {
+            Cliente cliente = new Cliente();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).First();
+                }
+            }
+            catch (Exception ex )
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return cliente;
+        }
+
+        public void desactivaCliente(int id)
+        {
+            Cliente cliente = new Cliente();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).First();
+                    cliente.Activo = 0;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -79,11 +79,13 @@
     <Compile Include="Solicitud_BajoStock.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="ViewCerrarSolicitudDispositivo.cs" />
+    <Compile Include="ViewCliente.cs" />
     <Compile Include="ViewDetBitacora.cs" />
     <Compile Include="ViewDetSeguimiento.cs" />
     <Compile Include="ViewDetSeguimientoBS.cs" />
     <Compile Include="ViewIngresar.cs" />
     <Compile Include="ViewListBitacora.cs" />
+    <Compile Include="ViewListCliente.cs" />
     <Compile Include="ViewListUsuario.cs" />
     <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSeguimientoBS.cs" />

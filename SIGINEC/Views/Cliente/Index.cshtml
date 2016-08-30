@@ -1,6 +1,6 @@
-﻿@model Model.Helpers.PagedData<Model.Persona>
+﻿@model Model.Helpers.PagedData<Model.ViewListCliente>
 @{
-    ViewBag.Title = "Personas";
+    ViewBag.Title = "Clientes";
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
     List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
     string mensaje = ViewBag.Mensaje;
@@ -23,7 +23,7 @@
     {
         if (subP.subPagina == "Personas")
         {
-            <a href="~/Persona/Index" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+            <a href="~/Persona/Index" class="list-group-item"> <b> @subP.subPagina </b> </a>
         }
         else if (subP.subPagina == "Usuarios")
         {
@@ -31,7 +31,7 @@
         }
         else if (subP.subPagina == "Clientes")
         {
-            <a href="~/Cliente/Index" class="list-group-item"> <b> @subP.subPagina </b> </a>
+            <a href="~/Cliente/Index" class="list-group-item active"> <b> @subP.subPagina </b> </a>
         }
         else if (subP.subPagina == "Responsables")
         {
@@ -40,20 +40,20 @@
     }
 }
 <div class="jumbotron" style="text-align:center;">
-    <h2> Personas <i class="glyphicon glyphicon-globe"></i> </h2>
+    <h2> Clientes <i class="glyphicon glyphicon-briefcase"></i> </h2>
 </div>
 <div>
-    <button class="btn btn-primary" id="nuevaPersona"> Nueva Persona </button>
+    <button class="btn btn-primary" id="nuevoCliente"> Nuevo Cliente </button>
 </div>
 <br />
 @if (mensaje != "")
 {
-    <div class="alert alert-success"> <i class="glyphicon glyphicon-ok"></i> @mensaje </div>
+    <div class="alert alert-success"> @mensaje </div>
 }
 <hr />
 <br />
-<div id="persona-list" class="container col-xs-12">
-    @Html.Partial("PersonasList")
+<div id="cliente-list" class="container col-xs-12">
+    @Html.Partial("ClienteList")
 </div>
 
 <script src="~/Assets/js/Logic.js"></script>

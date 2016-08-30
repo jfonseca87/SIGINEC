@@ -119,6 +119,7 @@
     <Compile Include="AuxiliaryFiles\AlmacenaAdjunto.cs" />
     <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\BitacoraController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DispositivoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
@@ -272,6 +273,11 @@
     <Content Include="Views\Usuario\nuevoUsuario.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Persona\editaPersona.cshtml" />
+    <Content Include="Views\Usuario\desactivaUsuario.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\ClienteList.cshtml" />
+    <Content Include="Views\Cliente\nuevoCliente.cshtml" />
+    <Content Include="Views\Cliente\desactivaCliente.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

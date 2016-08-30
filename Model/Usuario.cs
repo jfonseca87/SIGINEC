@@ -165,6 +165,44 @@ namespace Model
 
             return lstUsuario;
         }
+
+        public Usuario consUsuario(int id)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = context.Usuario.Where(u => u.Id_Usuario == id).First();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return usuario;
+        }
+
+        public List<Usuario> consUsuario(string user)
+        {
+            List<Usuario> usuario = new List<Usuario>();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = context.Usuario.Where(u => u.Nick_usuario == user.Trim()).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return usuario;
+        }
         
     }
 }

@@ -382,6 +382,24 @@
         $("#content1").load(url + "/Persona/nuevaPersona");
     });
 
+    $(".page-persona").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#persona-list").load(url + "/Persona/PersonasList/" + page);
+    });
+
+    $(".page-usuario").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#usuario-list").load(url + "/Usuario/UsuarioList/" + page);
+    });
+
+    $(".page-cliente").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#cliente-list").load(url + "/Cliente/ClienteList/" + page);
+    });
+
     $(".editaPersona").click(function () {
         $("#modal2").modal("show");
         $("#content1").load(url + "/Persona/editaPersona/" + $(this).data("id"));
@@ -390,5 +408,79 @@
     $("#nuevoUsuario").click(function () {
         $("#modal2").modal("show");
         $("#content1").load(url + "/Usuario/nuevoUsuario");
+    });
+
+    $("#Numero_Documento").blur(function () {
+        var documento = $(this).val();
+        
+        $.ajax({
+            url: url + "/persona/conspersona",
+            data: { documento: documento },
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        $(".validacion-persona").empty();
+                        $(".validacion-persona").append(
+                            'Ya existe una persona con este número de documento ' + item.Numero_Documento
+                        );
+                        $("#Numero_Documento").val("");
+                    });
+                }
+                else {
+                    $(".validacion-persona").empty();
+                }
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+
+    });
+
+    $("#Usuario").blur(function () {
+        var usuario = $(this).val();
+
+        $.ajax({
+            url: url + "/usuario/consusuario",
+            data: { user: usuario },
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        $(".validacion-usuario").empty();
+                        $(".validacion-usuario").append(
+                            'Ya existe una persona con este usuario ' + item.Nick_usuario 
+                        );
+                        $("#Usuario").val("");
+                    });
+                }
+                else
+                {
+                    $(".validacion-usuario").empty();
+                }
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+
+    });
+
+    $(".desUsuario").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/desactivaUsuario/"+ $(this).data("id"));
+    });
+
+    $("#nuevoCliente").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Cliente/nuevoCliente");
+    });
+
+    $(".desCliente").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Cliente/desactivaCliente/" + $(this).data("id"));
     });
 });

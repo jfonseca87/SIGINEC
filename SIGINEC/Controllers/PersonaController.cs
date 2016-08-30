@@ -76,6 +76,11 @@ namespace SIGINEC.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult consPersona(string documento)
+        {
+            return Json(persona.consPersona(documento), JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

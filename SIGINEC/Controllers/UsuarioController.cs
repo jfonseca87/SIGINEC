@@ -62,5 +62,24 @@ namespace SIGINEC.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult consUsuario(string user)
+        {
+            return Json(usuario.consUsuario(user), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult desactivaUsuario(int id)
+        {
+            return View(usuario.consUsuario(id));
+        }
+
+        [HttpPost]
+        public ActionResult desactivaUsuario(Usuario usuario)
+        {
+            usuario.DesactivaUsuario(usuario.Id_Usuario);
+            mensaje = "Se ha desactivado exitosamente el usuario " + usuario.Nick_usuario;
+            return RedirectToAction("Index");
+        }
     }
 }

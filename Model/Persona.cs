@@ -192,5 +192,26 @@ namespace Model
 
             return persona;
         }
+
+        public List<Persona> consPersona(string documento)
+        {
+            List<Persona> persona = new List<Persona>();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    persona = (from p in context.Persona
+                               where p.Numero_Documento == documento
+                               select p).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return persona;
+        }
     }
 }
