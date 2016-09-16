@@ -1,7 +1,8 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="Logic.js" />
+$(document).ready(function () {
 
     //var url = "http://192.168.0.20/siginec";
-    var url = "http://localhost:49240/";
+    var url = "http://localhost:49240";
     var guardaBitacora = 0;
 
     $("#LogIn").click(function () {
@@ -482,5 +483,157 @@
     $(".desCliente").click(function () {
         $("#modal2").modal("show");
         $("#content1").load(url + "/Cliente/desactivaCliente/" + $(this).data("id"));
+    });
+
+    $("#respBodega").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Responsable/respBodega");
+    });
+
+    $("#respBajoStock").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Responsable/respBajoStock");
+    });
+
+    $(".cambiaPassword").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/cambiaPassword/" + $(this).data("id"));
+    });
+
+    $("#cambioPassword").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Home/cambioPassword/" + $(this).data("id"));
+    });
+
+    $("#btnInfSolDisp").click(function () {
+       
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeSolDisp',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Solicitudes de Dispositivos');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].cantSolDisp]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].cantSolDisp + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Solicitud de Dispositivos por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
+    });
+
+    $("#btnInfSolBS").click(function () {
+
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeSolBajoStock',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Solicitudes de Bajo Stock');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].solBajoStock]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].solBajoStock + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Solicitud de Bajo Stock por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                  });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
+    });
+
+    $("#btnInfBitacora").click(function () {
+
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeBitacoras',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Bitacoras');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].cantBitacoras]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].cantBitacoras + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Bitacoras por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                  });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
     });
 });

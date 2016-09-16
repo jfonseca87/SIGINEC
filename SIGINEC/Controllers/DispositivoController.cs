@@ -11,6 +11,10 @@ namespace SIGINEC.Controllers
     public class DispositivoController : Controller
     {
         #region Variables y Objetos
+            static string mensaje = "";
+            string asunto = "";
+            string cuerpo = "";
+            string mailResp = "";
             Menu1 menu = new Menu1();
             Menu2 menu2 = new Menu2();
             Dispositivo dispositivo = new Dispositivo();
@@ -22,31 +26,55 @@ namespace SIGINEC.Controllers
             Seguimiento_BajoStock segBajoStock = new Seguimiento_BajoStock();
             Cliente cliente = new Cliente();
             Estados_Op estadosSolicitud = new Estados_Op();
-            public const int PageSize = 2;
+            Usuario usuario = new Usuario();
+            Persona persona = new Persona();
+            Mail mail = new Mail();
+            public const int PageSize = 10;
             static List<ViewSolBajoStock> lstSolBajoStock = new List<ViewSolBajoStock>();
         #endregion
 
         //Index Pagina Dispositivos Principal
         public ActionResult Index()
         {
-            ViewBag.Menu1 = menu.listaMenu1();
-            ViewBag.Menu2 = menu2.listarMenu2(1);
-            return View();
+            if (Session["Usuario"] != null)
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(1);
+                ViewBag.Perfil = Session["Perfil"].ToString();
+                
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         //Lógica para el mantenimiento de Dispositivos
         #region Ingreso Dispositivo
             public ActionResult IngDispositivo()
             {
-                ViewBag.Menu1 = menu.listaMenu1();
-                ViewBag.Menu2 = menu2.listarMenu2(1);
+                if (Session["Usuario"] != null)
+                {
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Menu2 = menu2.listarMenu2(1);
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
 
-                return View(dispositivo.listarDispositivo(PageSize, 1));
+                    return View(dispositivo.listarDispositivo(PageSize, 1));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
 
             public ActionResult DispositivoList(int id)
             {
-                return PartialView(dispositivo.listarDispositivo(PageSize, id));
+               return PartialView(dispositivo.listarDispositivo(PageSize, id));
             }
 
             public ActionResult insertDispositivo(int id = 0)
@@ -57,22 +85,39 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult insertDispositivo(Dispositivo dispositivo)
             {
-                int id = 0;
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null)
                 {
-                    id = dispositivo.Id_Dispositivo;
-                    dispositivo.guardarDispositivo(id);
-
-                    if (id > 0)
+                    int id = 0;
+                    if (ModelState.IsValid == true)
                     {
-                        inDisp.guardaRegistro("Modifica articulo existente", id, Convert.ToInt32(Session["IdUsuario"]));
-                    }
+                        id = dispositivo.Id_Dispositivo;
+                        dispositivo.guardarDispositivo(id);
 
-                    return RedirectToAction("IngDispositivo");
+                        if (id > 0)
+                        {
+                            mensaje = "Se ha editado exitosamente el dispositivo " + dispositivo.Nombre;
+                        }
+                        else
+                        {
+                            mensaje = "Se ha creado exitosamente el dispositivo " + dispositivo.Nombre;
+                        }
+                        
+
+                        if (id > 0)
+                        {
+                            inDisp.guardaRegistro("Modifica articulo existente", id, Convert.ToInt32(Session["IdUsuario"]));
+                        }
+
+                        return RedirectToAction("IngDispositivo");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -83,22 +128,30 @@ namespace SIGINEC.Controllers
 
             public ActionResult sumarCantidades(int id)
             {
-                return View(dispositivo.ConsultaDispositivo(id));
+                return View(dispositivo.consDispositivo(id));
             }
 
             [HttpPost]
-            public ActionResult sumarCantidades(Dispositivo dispositivo)
+            public ActionResult sumarCantidades(ViewSumarCantidades vSumarCant)
             {
-                int id = dispositivo.Id_Dispositivo;
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null)
                 {
-                    dispositivo.guardarDispositivo(id);
-                    inDisp.guardaRegistro("Modifica cantidad de articulos", id, Convert.ToInt32(Session["IdUsuario"]));
-                    return RedirectToAction("IngDispositivo");
+                    if (ModelState.IsValid == true)
+                    {
+                        dispositivo.SumarUnidades(vSumarCant.Id_Dispositvo, vSumarCant.cantSumar);
+                        mensaje = "Se han adherido exitosamente la cantidad de "+ vSumarCant.cantSumar +" unidad(es) para el dispositivo " + vSumarCant.Nom_Dispositivo;
+                        inDisp.guardaRegistro("Modifica cantidad de articulos", vSumarCant.Id_Dispositvo, Convert.ToInt32(Session["IdUsuario"]));
+
+                        return RedirectToAction("IngDispositivo");
+                    }
+                    else
+                    {
+                        return View(dispositivo.consDispositivo(vSumarCant.Id_Dispositvo));
+                    }
                 }
                 else
                 {
-                    return View(dispositivo.ConsultaDispositivo(id));
+                    return RedirectToAction("Index", "Home");
                 }
             }
         #endregion
@@ -108,10 +161,20 @@ namespace SIGINEC.Controllers
 
             public ActionResult solDispositivo()
             {
-                ViewBag.Menu1 = menu.listaMenu1();
-                ViewBag.Menu2 = menu2.listarMenu2(1);
+                if (Session["Usuario"] != null)
+                {
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Menu2 = menu2.listarMenu2(1);
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
 
-                return View(solDisp.listarSolicitudes(PageSize, 1));
+                    return View(solDisp.listarSolicitudes(PageSize, 1));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             public ActionResult SolDispositivoList(int id)
@@ -128,29 +191,64 @@ namespace SIGINEC.Controllers
 
             [HttpPost]
             public ActionResult nuevaSolicitud(Solicitud_Dispositivo solicitud)
-            {  
-                if (ModelState.IsValid == true)
+            {
+                if (Session["Usuario"] != null)
                 {
-                    solicitud.Estado_Solicitud = 1;
-                    solicitud.Usuario_SolDispositivo = Convert.ToInt32(Session["IdUsuario"]);
-                    solicitud.Fecha_Solicitud = System.DateTime.Now;
-                    solDisp.crearSolicitud(solicitud);
+                    if (ModelState.IsValid == true)
+                    {
+                        int idSolicitud = 0;
 
-                    return RedirectToAction("solDispositivo");
+                        solicitud.Estado_Solicitud = 1;
+                        solicitud.Usuario_SolDispositivo = Convert.ToInt32(Session["IdUsuario"]);
+                        solicitud.Fecha_Solicitud = System.DateTime.Now;
+                        solDisp.crearSolicitud(solicitud);
+
+                        idSolicitud = solDisp.retornaIdSolDisp(Convert.ToInt16(Session["IdUsuario"]));
+
+                        usuario = usuario.traeUsuarioResp(1);
+
+                        mensaje = "Se ha creado exitosamente la solicitud del dispositivo # "+ idSolicitud;
+
+                        asunto = "Solicitud de Dispositivo # " + idSolicitud;
+
+                        cuerpo = "Han realizado una solicitud de un dispositivo la cual quedo almacenada con el número " + idSolicitud + " \n" +
+                                 "Por favor ingrese a SIGINEC y de respuesta a esta lo más pronto posible, recuerde que solo se dispone de 2 horas como máximo para dar respuesta al cliente. \n" +
+                                 "Gracias.";
+
+                        mailResp = persona.traeCorreoResp(Convert.ToInt16(usuario.Id_Persona));
+
+                        mail.sendMail(asunto, cuerpo, mailResp);
+
+                        return RedirectToAction("solDispositivo");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
             public ActionResult seguimientoSolicitud(int id)
             {
-                ViewBag.Menu1 = menu.listaMenu1();
-                ViewBag.Menu2 = menu2.listarMenu2(1);
-                ViewBag.Datos = seguimiento.ListarSeguimientos(id, PageSize, 1);
+                if (Session["Usuario"] != null)
+                {
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Menu2 = menu2.listarMenu2(1);
+                    ViewBag.Datos = seguimiento.ListarSeguimientos(id, PageSize, 1);
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
 
-                return View(solDisp.verSolicitud(id));
+                    return View(solDisp.verSolicitud(id));
+                }
+                else 
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             public ActionResult SeguimientoList(int id, int currentPage)
@@ -168,17 +266,26 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult nuevoSeguimiento(Seguimiento_SolDispositivo seg)
             {
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null)
                 {
-                    seg.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
-                    seg.Fecha_Seguimiento = System.DateTime.Now;
-                    seg.creaSeguimiento();
+                    if (ModelState.IsValid == true)
+                    {
+                        seg.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
+                        seg.Fecha_Seguimiento = System.DateTime.Now;
+                        seg.creaSeguimiento();
 
-                    return RedirectToAction("seguimientoSolicitud/" + seg.Id_SolicitudDisp);
+                        mensaje = "Se ha creado exitosamente el seguimiento para la solicitud "+ seg.Id_SolicitudDisp;
+
+                        return RedirectToAction("seguimientoSolicitud/" + seg.Id_SolicitudDisp);
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
-                else
+                else 
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -198,32 +305,40 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult cerrarSolicitud(ViewCerrarSolicitudDispositivo cerrarSolicitud)
             {
-                Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
-
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null)
                 {
-                    seguimiento.Seguimiento = cerrarSolicitud.Observaciones;
-                    seguimiento.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
-                    seguimiento.Fecha_Seguimiento = System.DateTime.Now;
-                    seguimiento.Id_SolicitudDisp = cerrarSolicitud.Id;
-                    seguimiento.creaSeguimiento();
+                    Seguimiento_SolDispositivo seguimiento = new Seguimiento_SolDispositivo();
 
-                    solDisp.CerrarSolicitudDispositivo(cerrarSolicitud.Id);
-
-                    if (cerrarSolicitud.ResuelveSolicitud == 1)
+                    if (ModelState.IsValid == true)
                     {
-                        var disp = solDisp.Solicitud(cerrarSolicitud.Id);
-                        dispositivo.DescontarUnidades(Convert.ToInt16(disp.Id_Dispositivo), Convert.ToInt16(disp.Cantidad));
-                    }
+                        seguimiento.Seguimiento = cerrarSolicitud.Observaciones;
+                        seguimiento.Usuario_Seguimiento = Convert.ToInt32(Session["IdUsuario"]);
+                        seguimiento.Fecha_Seguimiento = System.DateTime.Now;
+                        seguimiento.Id_SolicitudDisp = cerrarSolicitud.Id;
+                        seguimiento.creaSeguimiento();
 
-                    return RedirectToAction("solDispositivo");
+                        mensaje = "Se ha cerrado exitosamente la solicitud No. " + cerrarSolicitud.Id;
+
+                        solDisp.CerrarSolicitudDispositivo(cerrarSolicitud.Id);
+
+                        if (cerrarSolicitud.ResuelveSolicitud == 1)
+                        {
+                            var disp = solDisp.Solicitud(cerrarSolicitud.Id);
+                            dispositivo.DescontarUnidades(Convert.ToInt16(disp.Id_Dispositivo), Convert.ToInt16(disp.Cantidad));
+                        }
+
+                        return RedirectToAction("solDispositivo");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            
         #endregion
 
         //Lógica para el mantenimiento de Solicitudes cuando el stock esta bajo
@@ -231,10 +346,20 @@ namespace SIGINEC.Controllers
 
             public ActionResult SolBajoStock()
             {
-                ViewBag.Menu1 = menu.listaMenu1();
-                ViewBag.Menu2 = menu2.listarMenu2(1);
+                if (Session["Usuario"] != null)
+                {
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Menu2 = menu2.listarMenu2(1);
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
 
-                return View(solBajoStock.listarSolicitudesBS(PageSize,1));
+                    return View(solBajoStock.listarSolicitudesBS(PageSize, 1));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             public ActionResult SolBajoStockList(int id)
@@ -253,26 +378,47 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult nuevaSolBajoStock(ViewSolBajoStock solBSTK)
             {
-                int idSolicitud = 0;
-
-                solBajoStock.Observaciones = solBSTK.Observaciones;
-                solBajoStock.Estado_Solicitud = 1;
-                solBajoStock.Usuario_SolBajoStock = Convert.ToInt16(Session["IdUsuario"]);
-                solBajoStock.Fecha_Solicitud = System.DateTime.Now;
-                solBajoStock.Usuario_Responsable = Convert.ToInt16(Session["IdUsuario"]);
-
-                solBajoStock.guardarSolicitud();
-                idSolicitud = solBajoStock.retornaIdSol(Convert.ToInt16(Session["IdUsuario"]));
-
-                foreach (var item in lstSolBajoStock)
+                if (Session["Usuario"] != null)
                 {
-                    detSolBajoStock.Id_Dispositivo = item.Id_Dispositivo;
-                    detSolBajoStock.Cantidad = item.CantidadDisp;
-                    detSolBajoStock.Id_Solicitud_Stock = idSolicitud;
-                    detSolBajoStock.guardaDetalle();
-                }
+                    int idSolicitud = 0;
+                    usuario = usuario.traeUsuarioResp(2);
 
-                return RedirectToAction("SolBajoStock");
+                    solBajoStock.Observaciones = solBSTK.Observaciones;
+                    solBajoStock.Estado_Solicitud = 1;
+                    solBajoStock.Usuario_SolBajoStock = Convert.ToInt16(Session["IdUsuario"]);
+                    solBajoStock.Fecha_Solicitud = System.DateTime.Now;
+                    solBajoStock.Usuario_Responsable = usuario.Id_Usuario;
+
+                    solBajoStock.guardarSolicitud();
+                    idSolicitud = solBajoStock.retornaIdSol(Convert.ToInt16(Session["IdUsuario"]));
+
+                    foreach (var item in lstSolBajoStock)
+                    {
+                        detSolBajoStock.Id_Dispositivo = item.Id_Dispositivo;
+                        detSolBajoStock.Cantidad = item.CantidadDisp;
+                        detSolBajoStock.Id_Solicitud_Stock = idSolicitud;
+                        detSolBajoStock.guardaDetalle();
+                    }
+
+                    mensaje = "Se ha creado exitosamente la solicitud de bajo stock "+ idSolicitud;
+
+                    asunto = "Solicitud de Bajo Stock # " + idSolicitud;
+
+                    cuerpo = "Han realizado una solicitud de bajo stock la cual quedo almacenada con el número " + idSolicitud +" \n"+
+                             "Por favor ingrese a SIGINEC y de respuesta a esta lo más pronto posible. \n" +
+                             "Gracias.";
+
+                    mailResp = persona.traeCorreoResp(Convert.ToInt16(usuario.Id_Persona));
+
+                    mail.sendMail(asunto, cuerpo, mailResp);
+
+                    return RedirectToAction("SolBajoStock");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
 
             [HttpPost]
@@ -301,11 +447,22 @@ namespace SIGINEC.Controllers
 
             public ActionResult SeguimientoSolicitudBS(int id)
             {
-                ViewBag.Menu1 = menu.listaMenu1();
-                ViewBag.Menu2 = menu2.listarMenu2(1);
-                ViewBag.Datos = segBajoStock.ListarSeguimientosBS(id, PageSize, 1);
+                if (Session["Usuario"] != null)
+                {
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Menu2 = menu2.listarMenu2(1);
+                    ViewBag.Datos = segBajoStock.ListarSeguimientosBS(id, PageSize, 1);
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
 
-                return View(solBajoStock.detalleSolBS(id));
+                    return View(solBajoStock.detalleSolBS(id));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
 
             public ActionResult SeguimientoBSList(int id, int currentPage)
@@ -324,19 +481,29 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult crearSeguimientoBS(Seguimiento_BajoStock segBS)
             {
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null && Session["Usuario"] != null)
                 {
-                    segBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
-                    segBS.Fecha_Seguimiento = System.DateTime.Now;
+                    if (ModelState.IsValid == true)
+                    {
+                        segBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
+                        segBS.Fecha_Seguimiento = System.DateTime.Now;
 
-                    segBS.crearSeguimientoBS();
+                        segBS.crearSeguimientoBS();
 
-                    return RedirectToAction("SeguimientoSolicitudBS/" + segBS.Id_Solicitud);
+                        mensaje = "Se ha creado exitosamente el seguimiento para la solicitud de Bajo Stock No. "+ segBS.Id_Solicitud;
+
+                        return RedirectToAction("SeguimientoSolicitudBS/" + segBS.Id_Solicitud);
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
+                
             }
 
             public ActionResult cerrarSolBS(int id)
@@ -349,26 +516,35 @@ namespace SIGINEC.Controllers
             [HttpPost]
             public ActionResult cerrarSolBS(ViewCerrarSolicitudDispositivo cerrarSolBS)
             {
-                Seguimiento_BajoStock seguimientoBS = new Seguimiento_BajoStock();
-
-                if (ModelState.IsValid == true)
+                if (Session["Usuario"] != null && Session["Usuario"] != null)
                 {
-                    seguimientoBS.Seguimiento = cerrarSolBS.Observaciones;
-                    seguimientoBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
-                    seguimientoBS.Fecha_Seguimiento = System.DateTime.Now;
-                    seguimientoBS.Id_Solicitud = cerrarSolBS.Id;
-                    seguimientoBS.crearSeguimientoBS();
+                    Seguimiento_BajoStock seguimientoBS = new Seguimiento_BajoStock();
 
-                    solBajoStock.CerrarSolicitudDispositivoBS(cerrarSolBS.Id);
+                    if (ModelState.IsValid == true)
+                    {
+                        seguimientoBS.Seguimiento = cerrarSolBS.Observaciones;
+                        seguimientoBS.Usuario_Seguimiento = Convert.ToInt16(Session["IdUsuario"]);
+                        seguimientoBS.Fecha_Seguimiento = System.DateTime.Now;
+                        seguimientoBS.Id_Solicitud = cerrarSolBS.Id;
+                        seguimientoBS.crearSeguimientoBS();
 
-                    return RedirectToAction("solBajoStock");
+                        solBajoStock.CerrarSolicitudDispositivoBS(cerrarSolBS.Id);
+
+                        mensaje = "Se ha cerrado exitosamente la solicitud de Bajo Stock No. " + cerrarSolBS.Id;
+
+                        return RedirectToAction("solBajoStock");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Home");
                 }
             }
-
         #endregion
+
     }
 }

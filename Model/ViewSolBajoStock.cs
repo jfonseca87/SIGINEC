@@ -15,7 +15,7 @@ namespace Model
 
         public int? CantidadDisp { get; set; }
 
-        [Required(ErrorMessage="Debe ingresar almenos una obervación")]
+        [Required(ErrorMessage="Debe ingresar almenos una observación")]
         public string Observaciones { get; set; }
     }
 }

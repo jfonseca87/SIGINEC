@@ -1,4 +1,4 @@
-﻿@model Model.Dispositivo
+﻿@model Model.ViewSumarCantidades
 
 @{
     ViewBag.Title = "sumarCantidades";
@@ -14,19 +14,14 @@
     </h4>
 </div>
 <div class="modal-body">
-    @Html.HiddenFor(d => d.Id_Dispositivo)
-    @Html.HiddenFor(d => d.Nombre)
-    @Html.HiddenFor(d => d.Clase)
-    @Html.HiddenFor(d => d.Marca)
-    @Html.HiddenFor(d => d.Modelo)
-    @Html.HiddenFor(d => d.Caracteristicas)
-    @Html.HiddenFor(d => d.Configuracion)
+    @Html.HiddenFor(d => d.Id_Dispositvo)
+    @Html.HiddenFor(d => d.Nom_Dispositivo)
 
    
-    <h4> Ingrese la cantidad de unidades del dispositivo <b> @Model.Nombre</b>.</h4>
+    <h4> Ingrese la cantidad de unidades del dispositivo <b> @Model.Nom_Dispositivo</b>.</h4>
     <div class="form-group">
         <label> Cantidad: </label>
-        @Html.TextBoxFor(d => d.Cantidad, new { @class="form-control", @placeholder="Cantidad" })
+        @Html.TextBoxFor(d => d.cantSumar, new { @class="form-control", @placeholder="Ingrese una cantidad" })
     </div>
 
     <div class="form-group" style="color:red;">

@@ -154,7 +154,7 @@ namespace Model
                 {
                     var Dispositivo = (from disp in context.Dispositivo
                                        where disp.Id_Dispositivo == id
-                                       select disp).First();
+                                       select disp).FirstOrDefault();
 
                     Dispositivo.Cantidad += cantSumar;
                     context.SaveChanges();
@@ -184,6 +184,31 @@ namespace Model
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public ViewSumarCantidades consDispositivo(int id)
+        {
+            ViewSumarCantidades vSumarCant = new ViewSumarCantidades();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    vSumarCant = (from d in context.Dispositivo
+                                  where d.Id_Dispositivo == id
+                                  select new ViewSumarCantidades
+                                  {
+                                      Id_Dispositvo = d.Id_Dispositivo,
+                                      Nom_Dispositivo = d.Nombre
+                                  }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return vSumarCant;
         }
     }
 }

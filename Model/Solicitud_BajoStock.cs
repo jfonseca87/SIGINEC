@@ -43,40 +43,33 @@ namespace Model
 
             using (var context = new SIGINECContext())
             {
+
                 try
                 {
                     if (CurrentPage > 1)
                     {
-                        solBS.Data = (from s in context.Solicitud_BajoStock
-                                    where s.Estado_Solicitud == 1
-                                    orderby s.Id_Solicitud
-                                    select new ViewSolicitudBajoStock
-                                    {
-                                        IdSolicitud = s.Id_Solicitud,
-                                        Observaciones = s.Observaciones,
-                                        Estado = s.Estados_Op.Estado_Op,
-                                        UsuarioSol = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
-                                        FechaSol = s.Fecha_Solicitud,
-                                        UsuarioResp = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
-                                        
-                                    }).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
+                        string q = "select s.Id_Solicitud as IdSolicitud, s.Observaciones, (select estado_op from Estados_Op where id_Estado = s.Estado_Solicitud) as Estado, " +
+                                   "(select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_SolBajoStock)) as UsuarioSol, " +
+                                   "s.Fecha_Solicitud as FechaSol, (select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_Responsable)) as UsuarioResp " +
+                                   "from Solicitud_BajoStock as s " +
+                                   "where s.Estado_Solicitud = 1 ";
+
+                        var query = context.Database.SqlQuery<ViewSolicitudBajoStock>(q).Skip(PageSize * (CurrentPage - 1)).Take(PageSize).ToList();
+
+                        solBS.Data = query;
 
                     }
                     else
                     {
-                        solBS.Data = (from s in context.Solicitud_BajoStock
-                                      where s.Estado_Solicitud == 1
-                                      orderby s.Id_Solicitud
-                                      select new ViewSolicitudBajoStock
-                                      {
-                                          IdSolicitud = s.Id_Solicitud,
-                                          Observaciones = s.Observaciones,
-                                          Estado = s.Estados_Op.Estado_Op,
-                                          UsuarioSol = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
-                                          FechaSol = s.Fecha_Solicitud,
-                                          UsuarioResp = s.Usuario.Persona.Nombre_1 + " " + s.Usuario.Persona.Apellido_2,
+                        string q = "select s.Id_Solicitud as IdSolicitud, s.Observaciones, (select estado_op from Estados_Op where id_Estado = s.Estado_Solicitud) as Estado, " +
+                                   "(select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_SolBajoStock)) as UsuarioSol, " +
+                                   "s.Fecha_Solicitud as FechaSol, (select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_Responsable)) as UsuarioResp " +
+                                   "from Solicitud_BajoStock as s " +
+                                   "where s.Estado_Solicitud = 1 ";
 
-                                      }).Take(PageSize).ToList();
+                        var query = context.Database.SqlQuery<ViewSolicitudBajoStock>(q).Take(PageSize).ToList();
+
+                        solBS.Data = query;
 
                     }
 
@@ -138,17 +131,13 @@ namespace Model
             {
                 using (var context = new SIGINECContext())
                 {
-                    vSeguimientoBS = (from vs in context.Solicitud_BajoStock
-                                      where vs.Id_Solicitud == id && vs.Estado_Solicitud == 1
-                                      select new ViewSeguimientoBS
-                                      {
-                                          IdSolicitud = vs.Id_Solicitud,
-                                          Observaciones = vs.Observaciones,
-                                          Estado = vs.Estados_Op.Estado_Op,
-                                          UsuarioSol = vs.Usuario.Persona.Nombre_1 + " " + vs.Usuario.Persona.Apellido_2,
-                                          UsuarioResp = vs.Usuario.Persona.Nombre_1 + " " + vs.Usuario.Persona.Apellido_2,
-                                          FechaSolicitud = vs.Fecha_Solicitud
-                                      }).FirstOrDefault();
+                    string q = "select s.Id_Solicitud as IdSolicitud, s.Observaciones, (select estado_op from Estados_Op where id_Estado = s.Estado_Solicitud) as Estado, " +
+                                   "(select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_SolBajoStock)) as UsuarioSol, " +
+                                   "(select nombres_mostrar from persona where id_persona = (select Id_Persona from usuario where Id_Usuario = s.Usuario_Responsable)) as UsuarioResp, s.Fecha_Solicitud as FechaSolicitud " +
+                                   "from Solicitud_BajoStock as s " +
+                                   "where s.Estado_Solicitud = 1 and s.Id_Solicitud = "+ id;
+
+                    vSeguimientoBS = (context.Database.SqlQuery<ViewSeguimientoBS>(q)).FirstOrDefault();
 
                     lstDispositivos = (from ls in context.Detalle_Solicitud_BajoStock
                                        where ls.Id_Solicitud_Stock == id

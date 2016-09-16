@@ -183,5 +183,28 @@ namespace Model
                 throw new Exception(ex.Message);
             }
         }
+
+        public int retornaIdSolDisp(int id)
+        {
+            int idSolicitud = 0;
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    idSolicitud = (from d in context.Solicitud_Dispositivo
+                                   where d.Usuario_SolDispositivo == id
+                                   orderby d.Id_Solicitud descending
+                                   select d.Id_Solicitud).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return idSolicitud;
+        }
     }
 }

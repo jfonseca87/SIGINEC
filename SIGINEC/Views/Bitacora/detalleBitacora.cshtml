@@ -4,6 +4,7 @@
     ViewBag.Title = "Bitacora # " + Model.Id_Bitacora;
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
     List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+    string Perfil = ViewBag.Perfil;
 }
 
 @section Menu1 {
@@ -15,7 +16,17 @@
         }
         else
         {
-            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            if (item.pagina == "Administracion")
+            {
+                if (Perfil == "adm")
+                {
+                    <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+                }
+            }
+            else
+            {
+                <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            }
         }
     }
 }

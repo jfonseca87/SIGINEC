@@ -135,7 +135,7 @@ namespace Model
             {
                 using (var context = new SIGINECContext())
                 {
-                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).First();
+                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).FirstOrDefault();
                 }
             }
             catch (Exception ex )
@@ -154,7 +154,7 @@ namespace Model
             {
                 using (var context = new SIGINECContext())
                 {
-                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).First();
+                    cliente = context.Cliente.Where(c => c.Id_Cliente == id).FirstOrDefault();
                     cliente.Activo = 0;
                     context.SaveChanges();
                 }

@@ -30,6 +30,7 @@ CREATE TABLE Usuario
 	Password_Usuario varchar(32)not null,
 	Activo int default 1, 
 	Tipo_Usuario varchar(3),
+	Resposanble int not null default 0,
 	Id_Persona int,
 	foreign key (Id_Persona) references Persona(Id_Persona)
 	on delete cascade 

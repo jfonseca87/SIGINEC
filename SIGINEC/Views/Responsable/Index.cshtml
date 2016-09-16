@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Responsables";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+    string mensaje = ViewBag.Mensaje;
+}
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Administracion")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    @foreach (var subP in lstMenu2)
+    {
+        if (subP.subPagina == "Personas")
+        {
+            <a href="~/Persona/Index" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Usuarios")
+        {
+            <a href="~/Usuario/Index" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Clientes")
+        {
+            <a href="~/Cliente/Index" class="list-group-item"> <b> @subP.subPagina </b> </a>
+        }
+        else if (subP.subPagina == "Responsables")
+        {
+            <a href="~/Responsable/Index" class="list-group-item active"> <b> @subP.subPagina </b> </a>
+        }
+    }
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Responsables <i class=" glyphicon glyphicon-flash"></i> </h2>
+</div>
+<div>
+    <button class="btn btn-primary" id="respBodega"> Responsable Bodega </button>
+</div>
+<br />
+<div>
+    <p>
+        <b>
+            @(
+                ViewBag.RespBodega != null ? ViewBag.RespBodega :
+                "No se ha asignado ningún resposanble de bodega"
+            )
+        </b>
+    </p>
+</div>
+<br /><hr /><br />
+<div>
+    <button class="btn btn-primary" id="respBajoStock"> Responsable Bajo Stock </button>
+</div>
+<br />
+<div>
+    <p>
+        <b>
+            @(
+                ViewBag.RespBajoStock != null ? ViewBag.RespBajoStock :
+                "No se ha asignado ningún resposanble para solicitudes de bajo stock"
+            )
+        </b>
+    </p>
+   
+</div>
+
+<script src="~/Assets/js/Logic.js"></script>

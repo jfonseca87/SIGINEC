@@ -18,8 +18,13 @@
                 <td> @Html.DisplayFor(u => usu.Num_Documento) </td>
                 <td> @Html.DisplayFor(u => usu.Nombres) </td>
                 <td> @Html.DisplayFor(u => usu.NickName) </td>
-                <td> @Html.DisplayFor(u => usu.Tipo_Usuario)</td>
+                <td> 
+                    @(usu.Tipo_Usuario == "adm" ? "Administrador" : "Usuario" )
+                </td>
                 <td style="text-align:right;">
+                    <button type="button" alt="Cambio Contraseña" title="Cambio Contraseña" class="btn btn-warning cambiaPassword" data-id="@usu.Id_Usuario">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    </button>
                     <button type="button" alt="Desactivar" title="Desactivar" class="btn btn-danger desUsuario" data-id="@usu.Id_Usuario">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>

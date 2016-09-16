@@ -213,5 +213,26 @@ namespace Model
 
             return persona;
         }
+
+        public string traeCorreoResp(int id)
+        {
+            string correo = "";
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    correo = (from p in context.Persona
+                              where p.Id_Persona == id
+                              select p.Email).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return correo;
+        }
     }
 }

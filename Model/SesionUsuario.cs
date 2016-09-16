@@ -13,5 +13,6 @@ namespace Model
         public int IdUsuario { get; set; }
         public string Usuario { get; set; }
         public string Nombres { get; set; }
+        public string Perfil { get; set; }
     }
 }

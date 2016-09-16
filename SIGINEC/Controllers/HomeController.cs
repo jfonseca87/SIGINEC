@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace SIGINEC.Controllers
     public class HomeController : Controller
     {
         #region Variables y Objetos
+            static string mensaje = "";  
             Usuario usuario = new Usuario();
+            MD5Convert convertidor = new MD5Convert();
         #endregion
 
         //Index Pagina Home Principal
@@ -24,11 +27,24 @@ namespace SIGINEC.Controllers
         #region Acciones
             public ActionResult Indexaf()
             {
-                Menu1 menu = new Menu1();
+                if (Session["Usuario"] != null)
+                {
+                    Menu1 menu = new Menu1();
 
-                Session["Operacion"] = "LogOut";
-                ViewBag.Menu1 = menu.listaMenu1();
-                return View();
+                    Session["Operacion"] = "LogOut";
+                    ViewBag.Menu1 = menu.listaMenu1();
+                    ViewBag.Perfil = Session["Perfil"].ToString();
+                    ViewBag.idUsuario = Session["IdUsuario"];
+                    ViewBag.Mensaje = mensaje;
+                    mensaje = "";
+
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                
             }
 
             public ActionResult Ingresar()
@@ -57,6 +73,7 @@ namespace SIGINEC.Controllers
                     Session["IdUsuario"] = User.IdUsuario;
                     Session["Usuario"] = User.Usuario;
                     Session["Nombres"] = User.Nombres;
+                    Session["Perfil"] = User.Perfil;
                 }
                 else
                 {
@@ -64,7 +81,8 @@ namespace SIGINEC.Controllers
                     {
                         IdUsuario = 0,
                         Usuario = "",
-                        Nombres = ""
+                        Nombres = "",
+                        Perfil = ""
                     };
                 }
 
@@ -73,11 +91,36 @@ namespace SIGINEC.Controllers
 
             public ActionResult Salir()
             {
-                Session["IdUsuario"] = "";
-                Session["Usuario"] = "";
-                Session["Nombres"] = "";
+                Session["IdUsuario"] = null;
+                Session["Usuario"] = null;
+                Session["Nombres"] = null;
+                Session["Perfil"] = null;
 
                 return RedirectToAction("Index");
+            }
+
+            public ActionResult cambioPassword(int id)
+            {
+                return View(usuario.conUsuario(id));
+            }
+
+            [HttpPost]
+            public ActionResult cambioPassword(ViewCambioPassword vCambioPassword)
+            {
+                string NuevoPassword = "";
+
+                if (ModelState.IsValid == true)
+                {
+                    NuevoPassword = convertidor.MD5ConvertPassword(vCambioPassword.Nuevo_Password);
+                    usuario.cambioPassword(vCambioPassword.Id_Usuario, NuevoPassword);
+                    mensaje = "Ha cambiado exitosamente la contraseña para " + vCambioPassword.Nombres;
+
+                    return RedirectToAction("Indexaf");
+                }
+                else
+                {
+                    return View();
+                }
             }
         
         #endregion

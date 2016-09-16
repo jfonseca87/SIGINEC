@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Informes";
+    List<Model.Menu1> lstMenu = ViewBag.Menu1;
+}
+@section Menu1 {
+    @foreach (var item in lstMenu)
+    {
+        if (item.pagina == "Informes")
+        {
+            <li class="active"> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
+    }
+}
+@section Menu2 {
+    <a href="~/Informes/InfSolDispositivos" class="list-group-item"> <b> Solicitudes Dispositivos por Mes </b> </a>
+    <a href="~/Informes/InfSolBajoStock" class="list-group-item"> <b> Solicitudes Bajo Stock por Mes </b> </a>
+    <a href="~/Informes/InfBitacoras" class="list-group-item"> <b> Bitacoras por Mes</b> </a>
+}
+<div class="jumbotron" style="text-align:center;">
+    <h2> Informes <i class="glyphicon glyphicon-signal"></i> </h2>
+</div>
+<div class="caption-full">
+    <h1> Que puedo hacer? </h1>
+    <p>
+        En el módulo de <b> INFORMES </b> de <b> SIGINEC (Sistema Integrado de Gestión de NEC) </b> puedes realizar las siguientes actividades
+    </p>
+    <br />
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <b>Solicitudes Dispositivos por Mes</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    En este módulo podras generar el informe de cuantas solicitudes de dispositivos que se han generado en cada mes.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <b>Solicitudes Bajo Stock por Mes</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    En este módulo podras generar el informe de cuantas solicitudes de bajo stock de dispositivos se han generado en cada mes.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <b>Bitacoras por Mes</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    En este módulo podras generar el informe de cuantas bitacoras se han generado en cada mes.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Assets/js/Logic.js"></script>

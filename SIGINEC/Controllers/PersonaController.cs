@@ -12,7 +12,7 @@ namespace SIGINEC.Controllers
 
         #region Variables y Objetos
             static string mensaje = "";
-            public const int PageSize = 2;
+            public const int PageSize = 10;
             Menu1 menu = new Menu1();
             Menu2 menu2 = new Menu2();
             Persona persona = new Persona();
@@ -20,11 +20,19 @@ namespace SIGINEC.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Menu1 = menu.listaMenu1();
-            ViewBag.Menu2 = menu2.listarMenu2(3);
-            ViewBag.Mensaje = mensaje;
-            mensaje = "";
-            return View( persona.listarPersonas(PageSize, 1) );
+            if (Session["Usuario"] != null && Session["Perfil"].ToString() == "adm")
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(3);
+                ViewBag.Mensaje = mensaje;
+                mensaje = "";
+
+                return View(persona.listarPersonas(PageSize, 1));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult PersonasList(int id)
@@ -40,17 +48,24 @@ namespace SIGINEC.Controllers
         [HttpPost]
         public ActionResult nuevaPersona(Persona persona)
         {
-            if (ModelState.IsValid == true)
+            if (Session["Usuario"] != null)
             {
-                persona.Nombres_Mostrar = persona.Nombre_1.Trim() + " " + persona.Apellido_1.Trim();
-                persona.GuardaPersona();
+                if (ModelState.IsValid == true)
+                {
+                    persona.Nombres_Mostrar = persona.Nombre_1.Trim() + " " + persona.Apellido_1.Trim();
+                    persona.GuardaPersona();
+                    mensaje = "Se ha creado exitosamente la persona " + persona.Nombres_Mostrar;
 
-                mensaje = "Se ha creado exitosamente la persona " + persona.Nombres_Mostrar;
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -62,17 +77,24 @@ namespace SIGINEC.Controllers
         [HttpPost]
         public ActionResult editaPersona(Persona persona) 
         {
-            if (ModelState.IsValid == true)
+            if (Session["Usuario"] != null)
             {
-                persona.Nombres_Mostrar = persona.Nombre_1.Trim() + " " + persona.Apellido_1.Trim();
-                persona.EditaPersona();
+                if (ModelState.IsValid == true)
+                {
+                    persona.Nombres_Mostrar = persona.Nombre_1.Trim() + " " + persona.Apellido_1.Trim();
+                    persona.EditaPersona();
+                    mensaje = "Se ha editado exitosamente la persona " + persona.Nombres_Mostrar;
 
-                mensaje = "Se ha editado exitosamente la persona " + persona.Nombres_Mostrar;
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 

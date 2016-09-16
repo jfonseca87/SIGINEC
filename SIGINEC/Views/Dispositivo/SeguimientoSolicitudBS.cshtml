@@ -4,6 +4,8 @@
     ViewBag.Title = "Solicitud Bajo Stock # " + Model.IdSolicitud;
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
     List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+    string Perfil = ViewBag.Perfil;
+    string mensaje = ViewBag.Mensaje;
 }
 @section Menu1 {
     @foreach (var item in lstMenu)
@@ -14,7 +16,17 @@
         }
         else
         {
-            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            if (item.pagina == "Administracion")
+            {
+                if (Perfil == "adm")
+                {
+                    <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+                }
+            }
+            else
+            {
+                <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            }
         }
     }
 }
@@ -77,7 +89,14 @@
 <div>
     <button class="btn btn-primary" id="nSeguimientoBS" data-id="@Model.IdSolicitud"> Nuevo Seguimiento </button>
 </div>
+<br />
+@if (mensaje != "")
+{
+    <div class="alert alert-success"> @mensaje </div>
+}
 <hr />
+<br />
+
 <div id="detalle-list" data-id="@Model.IdSolicitud" class="container col-xs-12">
    @Html.Partial("SeguimientoBSList")
 </div>

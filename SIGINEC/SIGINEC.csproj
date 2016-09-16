@@ -122,7 +122,9 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DispositivoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\ResponsableController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -142,6 +144,7 @@
     <Content Include="Assets\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\jquery.js" />
+    <Content Include="Assets\js\jsapi.js" />
     <Content Include="Assets\js\Logic.js" />
     <Content Include="Global.asax" />
     <Content Include="Assets\js\jquery.validate.min.js" />
@@ -261,6 +264,7 @@
     <Content Include="Views\Bitacora\nuevaBitacora.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\js\jquery191.min.js" />
     <None Include="Properties\PublishProfiles\Prueba.pubxml" />
     <Content Include="Views\Bitacora\BitacoraList.cshtml" />
     <Content Include="Views\Bitacora\detalleBitacora.cshtml" />
@@ -278,6 +282,15 @@
     <Content Include="Views\Cliente\ClienteList.cshtml" />
     <Content Include="Views\Cliente\nuevoCliente.cshtml" />
     <Content Include="Views\Cliente\desactivaCliente.cshtml" />
+    <Content Include="Views\Responsable\Index.cshtml" />
+    <Content Include="Views\Responsable\respBodega.cshtml" />
+    <Content Include="Views\Responsable\respBajoStock.cshtml" />
+    <Content Include="Views\Usuario\cambiaPassword.cshtml" />
+    <Content Include="Views\Home\cambioPassword.cshtml" />
+    <Content Include="Views\Informes\Index.cshtml" />
+    <Content Include="Views\Informes\InfSolDispositivos.cshtml" />
+    <Content Include="Views\Informes\InfSolBajoStock.cshtml" />
+    <Content Include="Views\Informes\InfBitacoras.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

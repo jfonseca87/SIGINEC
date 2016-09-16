@@ -37,6 +37,8 @@ namespace Model
 
         public string Tipo_Usuario { get; set; }
 
+        public int Responsable { get; set; }
+
         public int? Id_Persona { get; set; }
 
         public ICollection<Bitacora> Bitacora { get; set; }
@@ -70,7 +72,8 @@ namespace Model
                             {
                                 IdUsuario = u.Id_Usuario,
                                 Usuario = u.Nick_usuario,
-                                Nombres = u.Persona.Nombre_1 +" "+ u.Persona.Apellido_1 
+                                Nombres = u.Persona.Nombre_1 +" "+ u.Persona.Apellido_1,
+                                Perfil = u.Tipo_Usuario
                             }).FirstOrDefault();
             }
 
@@ -174,7 +177,7 @@ namespace Model
             {
                 using (var context = new SIGINECContext())
                 {
-                    usuario = context.Usuario.Where(u => u.Id_Usuario == id).First();
+                    usuario = context.Usuario.Where(u => u.Id_Usuario == id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -203,6 +206,162 @@ namespace Model
 
             return usuario;
         }
-        
+
+        public string traeResponsable(int id)
+        {
+            string persona = "";
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    persona = (from u in context.Usuario
+                               where u.Responsable == id
+                               select u.Persona.Nombres_Mostrar).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return persona;
+        }
+
+        public Usuario traeUsuarioResp(int id)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = (from u in context.Usuario
+                               where u.Responsable == id
+                               select u).FirstOrDefault();
+                }
+            }
+            catch (Exception ex )
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return usuario;
+        }
+
+
+        public List<UsuariosBodega> listarUsuariosBodega()
+        {
+            List<UsuariosBodega> lstUsuariosb = new List<UsuariosBodega>();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    lstUsuariosb = (from u in context.Usuario
+                                    where u.Activo == 1 && u.Responsable == 0
+                                    select new UsuariosBodega
+                                    {
+                                        Id_Usuario = u.Id_Usuario,
+                                        Nom_Usuario = u.Persona.Nombres_Mostrar
+                                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return lstUsuariosb;
+        }
+
+        public void activaResponsable(int id, int valor)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = context.Usuario.Where(u => u.Id_Usuario == id).FirstOrDefault();
+                    usuario.Responsable = valor;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void desactivaResponsable(int valor)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = (from u in context.Usuario
+                               where u.Responsable == valor
+                               select u).FirstOrDefault();
+                    if (usuario != null)
+                    {
+                        usuario.Responsable = 0;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public ViewCambioPassword conUsuario(int id)
+        {
+            ViewCambioPassword vCambioPasswordInfo = new ViewCambioPassword();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    vCambioPasswordInfo = (from vcp in context.Usuario
+                                           where vcp.Id_Usuario == id
+                                           select new ViewCambioPassword
+                                           {
+                                               Id_Usuario = vcp.Id_Usuario,
+                                               Nombres = vcp.Persona.Nombres_Mostrar
+                                           }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex )
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return vCambioPasswordInfo;
+        }
+
+        public void cambioPassword(int id, string password)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                using (var context = new SIGINECContext())
+                {
+                    usuario = (from u in context.Usuario
+                               where u.Id_Usuario == id
+                               select u).FirstOrDefault();
+                    usuario.Password_Usuario = password;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Dispositivo.cs" />
     <Compile Include="Estados_Op.cs" />
     <Compile Include="Estado_Dispositivo.cs" />
+    <Compile Include="Helpers\Mail.cs" />
     <Compile Include="Helpers\MD5Convert.cs" />
     <Compile Include="Helpers\PagedData.cs" />
     <Compile Include="Helpers\RecortaTexto.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Menu1.cs" />
     <Compile Include="Menu2.cs" />
     <Compile Include="Bitacora.cs" />
+    <Compile Include="SolDispMes.cs" />
     <Compile Include="Solicitud_Dispositivo.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +80,9 @@
     <Compile Include="SIGINECContext.cs" />
     <Compile Include="Solicitud_BajoStock.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="UsuariosBodega.cs" />
+    <Compile Include="ViewCambioContraseña.cs" />
+    <Compile Include="ViewCambioPassword.cs" />
     <Compile Include="ViewCerrarSolicitudDispositivo.cs" />
     <Compile Include="ViewCliente.cs" />
     <Compile Include="ViewDetBitacora.cs" />
@@ -87,11 +92,13 @@
     <Compile Include="ViewListBitacora.cs" />
     <Compile Include="ViewListCliente.cs" />
     <Compile Include="ViewListUsuario.cs" />
+    <Compile Include="ViewRespBodega.cs" />
     <Compile Include="viewSeguimiento.cs" />
     <Compile Include="ViewSeguimientoBS.cs" />
     <Compile Include="ViewSolBajoStock.cs" />
     <Compile Include="ViewSolicitudBajoStock.cs" />
     <Compile Include="ViewSolicitudDispositivo.cs" />
+    <Compile Include="ViewSumarCantidades.cs" />
     <Compile Include="ViewUsuario.cs" />
   </ItemGroup>
   <ItemGroup>

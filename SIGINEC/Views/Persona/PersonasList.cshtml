@@ -17,7 +17,7 @@
                 <td> @Html.DisplayFor(p => per.Id_Persona) </td>
                 <td> @Html.DisplayFor(p => per.Numero_Documento) </td>
                 <td align="center"> @Html.DisplayFor(p => per.Tipo_Documento) </td>
-                <td> @per.Nombre_1 @per.Apellido_1 </td>
+                <td> @Html.DisplayFor(p => per.Nombres_Mostrar)</td>
                 <td> @Html.DisplayFor(p => per.Email) </td>
                 <td style="text-align:right;">
                     <button type="button" alt="Editar" title="Editar" class="btn btn-warning editaPersona" data-id="@per.Id_Persona">

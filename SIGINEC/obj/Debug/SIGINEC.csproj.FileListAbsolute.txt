@@ -62,40 +62,6 @@ D:\jlfr\Escritorio\Jorge\SIGINEC\SIGINEC\bin\EntityFramework.xml
 D:\jlfr\Escritorio\Jorge\SIGINEC\SIGINEC\obj\Debug\SIGINEC.csprojResolveAssemblyReference.cache
 D:\jlfr\Escritorio\Jorge\SIGINEC\SIGINEC\obj\Debug\SIGINEC.dll
 D:\jlfr\Escritorio\Jorge\SIGINEC\SIGINEC\obj\Debug\SIGINEC.pdb
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll.config
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.pdb
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Microsoft.Web.Infrastructure.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Model.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Newtonsoft.Json.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Net.Http.Formatting.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Helpers.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.WebHost.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Mvc.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Razor.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Deployment.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Razor.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Model.pdb
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Newtonsoft.Json.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Net.Http.Formatting.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Helpers.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.WebHost.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Mvc.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Razor.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Deployment.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Razor.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.xml
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.csprojResolveAssemblyReference.cache
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.pdb
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.dll
-D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.xml
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll.config
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.pdb
@@ -130,3 +96,37 @@ C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Syste
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.csprojResolveAssemblyReference.cache
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.dll
 C:\Users\USUARIO\Documents\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.pdb
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll.config
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\SIGINEC.pdb
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Microsoft.Web.Infrastructure.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Model.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Newtonsoft.Json.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Net.Http.Formatting.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Helpers.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.WebHost.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Mvc.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Razor.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Deployment.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Razor.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Model.pdb
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\EntityFramework.SqlServer.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\Newtonsoft.Json.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Net.Http.Formatting.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Helpers.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Http.WebHost.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Mvc.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.Razor.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Deployment.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\bin\System.Web.WebPages.Razor.xml
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.csprojResolveAssemblyReference.cache
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.dll
+D:\jlfr\Mis Documentos ( Local )\Visual Studio 2013\Projects\SIGINEC\SIGINEC\obj\Debug\SIGINEC.pdb

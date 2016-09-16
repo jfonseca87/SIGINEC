@@ -12,7 +12,7 @@ namespace SIGINEC.Controllers
     {
         #region Variables y Objetos
             static string mensaje = "";
-            public const int PageSize = 2;
+            public const int PageSize = 10;
             Menu1 menu = new Menu1();
             Menu2 menu2 = new Menu2();
             Persona persona = new Persona();
@@ -22,11 +22,20 @@ namespace SIGINEC.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Menu1 = menu.listaMenu1();
-            ViewBag.Menu2 = menu2.listarMenu2(3);
-            ViewBag.Mensaje = mensaje;
-            mensaje = "";
-            return View( usuario.listarUsuarios(PageSize, 1) );
+            if (Session["Usuario"] != null && Session["Perfil"].ToString() == "adm")
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(3);
+                ViewBag.Mensaje = mensaje;
+                mensaje = "";
+
+                return View(usuario.listarUsuarios(PageSize, 1));
+            }
+            else
+            {
+                return RedirectToAction("Indexaf", "Home");
+            }
+            
         }
 
         public ActionResult UsuarioList(int id)
@@ -43,24 +52,32 @@ namespace SIGINEC.Controllers
         [HttpPost]
         public ActionResult nuevoUsuario(ViewUsuario vUsuario)
         {
-            if (ModelState.IsValid == true)
+            if (Session["Usuario"] != null)
             {
-                usuario.Id_Persona = vUsuario.Persona;
-                usuario.Nick_usuario = vUsuario.Usuario;
-                usuario.Password_Usuario = convertidor.MD5ConvertPassword(vUsuario.Contrasena.Trim());
-                usuario.Tipo_Usuario = vUsuario.Tipo_Usuario;
-                usuario.Activo = 1;
-                usuario.GuardarUsuario();
+                if (ModelState.IsValid == true)
+                {
+                    usuario.Id_Persona = vUsuario.Persona;
+                    usuario.Nick_usuario = vUsuario.Usuario;
+                    usuario.Password_Usuario = convertidor.MD5ConvertPassword(vUsuario.Contrasena.Trim());
+                    usuario.Tipo_Usuario = vUsuario.Tipo_Usuario;
+                    usuario.Activo = 1;
+                    usuario.GuardarUsuario();
 
-                persona.cambiaAsignacion(vUsuario.Persona);
+                    persona.cambiaAsignacion(vUsuario.Persona);
 
-                mensaje = "Se ha creado exitosamente el usuario " + vUsuario.Usuario;
-                return RedirectToAction("Index");
+                    mensaje = "Se ha creado exitosamente el usuario " + vUsuario.Usuario;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+            
         }
 
         [HttpPost]
@@ -77,9 +94,40 @@ namespace SIGINEC.Controllers
         [HttpPost]
         public ActionResult desactivaUsuario(Usuario usuario)
         {
-            usuario.DesactivaUsuario(usuario.Id_Usuario);
-            mensaje = "Se ha desactivado exitosamente el usuario " + usuario.Nick_usuario;
-            return RedirectToAction("Index");
+            if (Session["Usuario"] != null)
+            {
+                usuario.DesactivaUsuario(usuario.Id_Usuario);
+                mensaje = "Se ha desactivado exitosamente el usuario " + usuario.Nick_usuario;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult cambiaPassword(int id)
+        {
+            return View(usuario.conUsuario(id));
+        }
+
+        [HttpPost]
+        public ActionResult cambiaPassword(ViewCambioPassword vCambioPassword)
+        {
+            string NuevoPassword = "";
+
+            if (ModelState.IsValid == true)
+            {
+                NuevoPassword = convertidor.MD5ConvertPassword(vCambioPassword.Nuevo_Password);
+                usuario.cambioPassword(vCambioPassword.Id_Usuario, NuevoPassword);
+                mensaje = "Ha cambiado exitosamente la contraseña para " + vCambioPassword.Nombres;
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

@@ -19,9 +19,16 @@ namespace SIGINEC.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Menu1 = menu.listaMenu1();
-            ViewBag.Menu2 = menu2.listarMenu2(3);
-            return View();
+            if (Session["Usuario"] != null && Session["Perfil"].ToString() == "adm")
+            {
+                ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Menu2 = menu2.listarMenu2(3);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Indexaf", "Home");
+            }
         }
 
     }
