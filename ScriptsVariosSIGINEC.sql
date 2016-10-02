@@ -1,17 +1,17 @@
 use siginec
 
 --Crea el usuario administrador
-insert into persona (Tipo_Documento, Numero_Documento, Nombre_1, Apellido_1, Email)
-values ('CC', '1111111', 'Administrador', 'Administrador', 'admin@siginec.com')
+insert into persona (Tipo_Documento, Numero_Documento, Nombre_1, Apellido_1, Nombres_Mostrar, Email, Asignado)
+values ('CC', '1111111', 'Administrador', ' ', 'Administrador', 'admin@siginec.com', 1)
 
-insert into usuario (Nick_usuario, Password_Usuario, Activo, Tipo_Usuario)
-values ('admin', '0192023a7bbd73250516f069df18b500', '1', 'adm')
+insert into usuario (Nick_usuario, Password_Usuario, Activo, Tipo_Usuario, Id_Persona)
+values ('admin', '0192023a7bbd73250516f069df18b500', '1', 'adm', 1)
 
 go
 
 --Creación Cliente de Prueba
-insert into persona (Tipo_Documento, numero_documento, nombre_1, Apellido_1, Email, Cargo)
-values ('NIT', '900123456', 'Claro', ' ', 'ingenieria@claro.com.co', 'Cliente')
+insert into persona (Tipo_Documento, numero_documento, nombre_1, Apellido_1, Nombres_Mostrar, Email, Cargo, Asignado)
+values ('NIT', '900123456', 'Claro', ' ', 'Claro', 'ingenieria@claro.com.co', 'Cliente', 1)
 
 insert into cliente (direccion, telefono, activo, Id_Persona)
 values ('Calle 5 # 4 - 46', '7500500', 1, 2)
@@ -21,7 +21,7 @@ go
 --Datos Menu1
 insert into Menu1 (pagina, activa) values ('Dispositivo', 1)
 insert into Menu1 (pagina, activa) values ('Bitacora', 1)
-insert into Menu1 (pagina, activa) values ('Administración', 1)
+insert into Menu1 (pagina, activa) values ('Administracion', 1)
 insert into Menu1 (pagina, activa) values ('Informes', 1)
 
 go

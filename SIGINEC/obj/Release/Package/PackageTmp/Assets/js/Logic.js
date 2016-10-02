@@ -1,7 +1,9 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="Logic.js" />
+$(document).ready(function () {
 
     var url = "http://192.168.0.20/siginec";
-    //var url = "http://localhost:49240/";
+    //var url = "http://localhost:49240";
+    var guardaBitacora = 0;
 
     $("#LogIn").click(function () {
         $("#modal1").modal();
@@ -37,7 +39,10 @@
         location.href = url + "/home/Salir";
     });
 
-    $("#Entrar").click(function () {
+    $("#Entrar").on("click", function () {
+
+        $(".loading").css("visibility", "visible");
+        $("#Entrar").attr("disabled", true);
 
         var datos = $("#ingForm").serialize();
 
@@ -51,6 +56,8 @@
                     location.href = url + "/home/indexaf";
                 } else
                 {
+                    $(".loading").css("visibility", "hidden");
+                    $("#Entrar").attr("disabled", false);
                     $("#mensaje").show();
                 }
             },
@@ -58,6 +65,7 @@
                 alert("Ha ocurrido un error contacte con el departamento de Sistemas!!!");
             }
         });
+
     });
 
     $(".page-dispositivo").click(function () {
@@ -241,24 +249,396 @@
 
     $("#adjunto").change(function () {
 
+        $("#UploadAjax").submit();
+        
         $.ajax({
-            url: url + "/Bitacora/listAdjuntos",
-            data:
-            {
-                Fotografia : $(this).val()
-            },
+            url: url + "/Bitacora/listarAdjuntos",
             method: "POST",
             datatype: "json",
             success: function (data) {
                 $("#contenedor").empty();
                 $.each(data, function (i, item) {
                     $("#contenedor").append(
-                        '<li class="list-group-item list-group-item-info">'+ item.Fotografia +'<button type="button" id="elimina-item" class="close" data-text="'+ item.Fotografia +'"><span aria-hidden="true">&times;</span></button></li>'
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.NomArchivo +' ('+ item.PesoArchivo +' KB) <button type="button" class="close" data-text="'+ item.NomArchivo +'"><span aria-hidden="true">&times;</span></button></li>'
                     );
                 });
             },
             fail: function (mensaje) {
                 alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+    });
+
+    $("#contenedor").on("click", "button", function () {
+        alert("Vas a borrar algo... be careful...");
+
+        $.ajax({
+            url: url + "/bitacora/eliminaregistro",
+            data: { adjunto: $(this).data("text") },
+            method: "POST",
+            datatype: "json",
+            success: function (data) {
+                $("#contenedor").empty();
+                $.each(data, function (i, item) {
+                    $("#contenedor").append(
+                        '<li type="button" class="list-group-item list-group-item-info">' + item.NomArchivo + ' (' + item.PesoArchivo + ' KB) <button type="button" class="close" data-text="' + item.NomArchivo + '"><span aria-hidden="true">&times;</span></button></li>'
+                    );
+                });
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+    });
+
+    $("#guardarNueva").click(function () {
+
+        guardaBitacora = 1;
+
+        $("#UploadAjax").submit();
+
+    });
+
+    $("#UploadAjax").on("submit", function (e) {
+
+        if (guardaBitacora == 1) {
+
+            var Datos = $("#UploadAjax").serialize();
+
+            $.ajax({
+                url: url + "/bitacora/nuevaBitacora",
+                data: Datos,
+                method: "POST"
+            });
+
+        }
+        else
+        {
+            e.preventDefault();
+
+            var formdata = new FormData(document.getElementById("UploadAjax"));
+
+            $.ajax({
+                url: url + "/bitacora/listAdjuntos",
+                type: "POST",
+                datatype: "html",
+                data: formdata,
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        }
+    });
+
+    $(".page-bitacora").click(function () {
+
+        var page = parseInt($(this).html());
+
+        $("#bitacora-list").load(url + "/Bitacora/BitacoraList/" + page);
+    });
+
+    $(".detBitacora").click(function () {
+        location.href = url + "/bitacora/detalleBitacora/" + $(this).data("id");
+    });
+
+    $("#verImagenes").click(function () {
+        
+        var cont = 0;
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Bitacora/traeImagenes/" + $(this).data("id"));
+
+        $.ajax({
+            url: url + "/Bitacora/conImagenes/" + $(this).data("id"),
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        var ruta = url + "/BitacoraImagenes/" + item.Id_Bitacora + "/" + item.Fotografia;
+                        if (cont == 0) {
+                            $(".carousel-inner").append(
+                                '<div class="item active"><img src="' + ruta + '" width="600px" /></div>'
+                             );
+                        } else {
+                            $(".carousel-inner").append(
+                                '<div class="item"><img src="' + ruta + '" width="600px" /></div>'
+                             );
+                        }
+                        cont += 1;
+                    });
+                } else
+                {
+                    $(".contImagenes").empty();
+                    $(".contImagenes").append(
+                        '<h4>No se cargaron imágenes para la bitacora No. <b>' + $("#verImagenes").data("id") + '</b></h4>'
+                    );
+                    $(".imagenFooter").append(
+                        '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>'
+                    );
+                }
+
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+    });
+
+    $("#nuevaPersona").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Persona/nuevaPersona");
+    });
+
+    $(".page-persona").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#persona-list").load(url + "/Persona/PersonasList/" + page);
+    });
+
+    $(".page-usuario").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#usuario-list").load(url + "/Usuario/UsuarioList/" + page);
+    });
+
+    $(".page-cliente").click(function () {
+        var page = parseInt($(this).html());
+
+        $("#cliente-list").load(url + "/Cliente/ClienteList/" + page);
+    });
+
+    $(".editaPersona").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Persona/editaPersona/" + $(this).data("id"));
+    });
+
+    $("#nuevoUsuario").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/nuevoUsuario");
+    });
+
+    $("#Numero_Documento").blur(function () {
+        var documento = $(this).val();
+        
+        $.ajax({
+            url: url + "/persona/conspersona",
+            data: { documento: documento },
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        $(".validacion-persona").empty();
+                        $(".validacion-persona").append(
+                            'Ya existe una persona con este número de documento ' + item.Numero_Documento
+                        );
+                        $("#Numero_Documento").val("");
+                    });
+                }
+                else {
+                    $(".validacion-persona").empty();
+                }
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+
+    });
+
+    $("#Usuario").blur(function () {
+        var usuario = $(this).val();
+
+        $.ajax({
+            url: url + "/usuario/consusuario",
+            data: { user: usuario },
+            type: "POST",
+            datatype: "json",
+            success: function (data) {
+                if (data != "") {
+                    $.each(data, function (i, item) {
+                        $(".validacion-usuario").empty();
+                        $(".validacion-usuario").append(
+                            'Ya existe una persona con este usuario ' + item.Nick_usuario 
+                        );
+                        $("#Usuario").val("");
+                    });
+                }
+                else
+                {
+                    $(".validacion-usuario").empty();
+                }
+            },
+            fail: function (mensaje) {
+                alert("Ha ocurrido un error gravisimo!!!")
+            }
+        });
+
+    });
+
+    $(".desUsuario").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/desactivaUsuario/"+ $(this).data("id"));
+    });
+
+    $("#nuevoCliente").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Cliente/nuevoCliente");
+    });
+
+    $(".desCliente").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Cliente/desactivaCliente/" + $(this).data("id"));
+    });
+
+    $("#respBodega").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Responsable/respBodega");
+    });
+
+    $("#respBajoStock").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Responsable/respBajoStock");
+    });
+
+    $(".cambiaPassword").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Usuario/cambiaPassword/" + $(this).data("id"));
+    });
+
+    $("#cambioPassword").click(function () {
+        $("#modal2").modal("show");
+        $("#content1").load(url + "/Home/cambioPassword/" + $(this).data("id"));
+    });
+
+    $("#btnInfSolDisp").click(function () {
+       
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeSolDisp',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Solicitudes de Dispositivos');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].cantSolDisp]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].cantSolDisp + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Solicitud de Dispositivos por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
+    });
+
+    $("#btnInfSolBS").click(function () {
+
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeSolBajoStock',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Solicitudes de Bajo Stock');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].solBajoStock]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].solBajoStock + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Solicitud de Bajo Stock por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                  });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
+    });
+
+    $("#btnInfBitacora").click(function () {
+
+        $("#table-content").empty();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url + '/Informes/traeInformeBitacoras',
+            cache: false,
+            success: function (chartsdata) {
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Mes');
+                data.addColumn('number', 'Cant. Bitacoras');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].Mes, chartsdata[i].cantBitacoras]);
+
+                    $("#table-content").append(
+                        '<tr><td> ' + chartsdata[i].Mes + '</td><td style="text-align:center;">' + chartsdata[i].cantBitacoras + '</td></tr>'
+                    );
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+
+                chart.draw(data,
+                  {
+                      title: "Informe Bitacoras por Mes",
+                      position: "center",
+                      fontsize: "48px",
+                      chartArea: { width: '50%' },
+                  });
+
+                $(".contenedor").css("visibility", "visible");
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
             }
         });
     });

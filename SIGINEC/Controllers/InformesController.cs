@@ -20,6 +20,7 @@ namespace SIGINEC.Controllers
             if (Session["Usuario"] != null)
             {
                 ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Perfil = Session["Perfil"].ToString();
 
                 return View();
             }
@@ -34,6 +35,7 @@ namespace SIGINEC.Controllers
             if (Session["Usuario"] != null)
             {
                 ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Perfil = Session["Perfil"].ToString();
 
                 return View();
             }
@@ -56,6 +58,7 @@ namespace SIGINEC.Controllers
             if (Session["Usuario"] != null)
             {
                 ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Perfil = Session["Perfil"].ToString();
 
                 return View();
             }
@@ -78,6 +81,7 @@ namespace SIGINEC.Controllers
             if (Session["Usuario"] != null)
             {
                 ViewBag.Menu1 = menu.listaMenu1();
+                ViewBag.Perfil = Session["Perfil"].ToString();
 
                 return View();
             }

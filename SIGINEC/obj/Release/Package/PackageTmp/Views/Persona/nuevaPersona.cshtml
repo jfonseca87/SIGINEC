@@ -1,0 +1,59 @@
+﻿@model Model.Persona
+
+@{
+    ViewBag.Title = "nuevaPersona";
+    Layout = null;
+}
+
+@{Html.BeginForm("nuevaPersona", "Persona", FormMethod.Post);}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" style="text-align:center;">
+        Nueva Persona
+        <i class="glyphicon glyphicon-plus"></i>
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label> Primer Nombre: </label>
+        @Html.TextBoxFor(p => p.Nombre_1, new { @class = "form-control", @placeholder = "Ingrese su primer nombre" })
+    </div>
+    <div class="form-group">
+        <label> Segundo Nombre: </label>
+        @Html.TextBoxFor(p => p.Nombre_2, new { @class = "form-control", @placeholder = "Ingrese su segundo nombre" })
+    </div>
+    <div class="form-group">
+        <label> Primer Apellido: </label>
+        @Html.TextBoxFor(p => p.Apellido_1, new { @class = "form-control", @placeholder = "Ingrese su primer apellido" })
+    </div>
+    <div class="form-group">
+        <label> Segundo Apellido: </label>
+        @Html.TextBoxFor(p => p.Apellido_2, new { @class = "form-control", @placeholder = "Ingrese su segundo apellido" })
+    </div>
+    <div class="form-group">
+        <label> Tipo Documento: </label>
+        @Html.DropDownListFor(p => p.Tipo_Documento, new SelectList(new[] { new SelectListItem { Value = "CC", Text = "Cédula de Ciudadania" }, new SelectListItem { Value = "CE", Text = "Cédula de Extranjeria" }, new SelectListItem { Value = "TI", Text = "Tarjeta de Identidad" } }, "Value", "Text"), "Seleccione...", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> No Documento: </label>
+        @Html.TextBoxFor(p => p.Numero_Documento, new { @class = "form-control", @placeholder = "Ingrese su número de documento" })
+    </div>
+    <div class="form-group">
+        <label> Email: </label>
+        @Html.TextBoxFor(p => p.Email, new { @class = "form-control", @placeholder = "Ingrese su email" })
+    </div>
+    <div class="form-group" style="color:red;">
+        <p class="validacion-persona"></p>
+        @Html.ValidationSummary(false, "")
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary"> Guardar </button>
+</div>
+@{Html.EndForm();}
+
+@* Scripts *@
+<script src="~/Assets/js/jquery.validate.min.js"></script>
+<script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Assets/js/Logic.js"></script>

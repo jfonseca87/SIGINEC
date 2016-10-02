@@ -27,7 +27,10 @@
         </div>
     </div>
     <div class="modal-footer modal-sm">
-        <button type="button" class="btn btn-primary" id="Entrar">Inicia Sesión</button>
+        <span class="loading" style="visibility:hidden">
+            <img src="~/Assets/Images/ajax-loader.gif"/>
+        </span>
+        <button type="button" class="btn btn-primary" id="Entrar" data-loading-text="Loading...">Inicia Sesión</button>
     </div>
 @{Html.EndForm();}
 

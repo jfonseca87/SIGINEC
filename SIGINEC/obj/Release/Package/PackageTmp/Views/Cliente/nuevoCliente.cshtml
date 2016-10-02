@@ -1,0 +1,44 @@
+﻿@model Model.ViewCliente
+
+@{
+    ViewBag.Title = "Nuevo Cliente";
+    Layout = null;
+    List<Model.Persona> lstPersonas = ViewBag.Personas;
+}
+
+@{Html.BeginForm("nuevoCliente", "Cliente", FormMethod.Post);}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" style="text-align:center;">
+        Nuevo Cliente
+        <i class="glyphicon glyphicon-plus"></i>
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label> Persona: </label>
+        @Html.DropDownListFor(c => c.Persona, new SelectList(lstPersonas, "Id_Persona", "Nombres_Mostrar"), "Seleccione...", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> Dirección: </label>
+        @Html.TextBoxFor(c => c.Direccion, new { @class = "form-control", @placeholder = "Ingrese una dirección" })
+    </div>
+    <div class="form-group">
+        <label> Telefóno: </label>
+        @Html.TextBoxFor(c => c.Telefono, new { @class = "form-control", @placeholder = "Ingrese un número telefónico" })
+    </div>
+    <div class="form-group" style="color:red;">
+        <p class="validacion-cliente"></p>
+        @Html.ValidationSummary(false, "")
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary"> Guardar </button>
+</div>
+@{Html.EndForm();}
+
+@* Scripts *@
+<script src="~/Assets/js/jquery.validate.min.js"></script>
+<script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Assets/js/Logic.js"></script>

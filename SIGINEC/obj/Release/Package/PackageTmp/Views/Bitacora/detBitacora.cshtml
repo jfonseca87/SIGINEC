@@ -1,8 +1,10 @@
-﻿@model Model.Helpers.PagedData<Model.Bitacora>
+﻿@model Model.Helpers.PagedData<Model.ViewListBitacora>
 @{
     ViewBag.Title = "Bitacoras";
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
     List<Model.Menu2> lstMenu2 = ViewBag.Menu2;
+    string Perfil = ViewBag.Perfil;
+    string mensaje = ViewBag.Mensaje;
 }
 @section Menu1 {
     @foreach (var item in lstMenu)
@@ -13,7 +15,17 @@
         }
         else
         {
-            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            if (item.pagina == "Administracion")
+            {
+                if (Perfil == "adm")
+                {
+                    <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+                }
+            }
+            else
+            {
+                <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            }
         }
     }
 }
@@ -33,8 +45,12 @@
     <button class="btn btn-primary" id="nuevaBitacora"> Nueva Bitacora </button>
 </div>
 <br />
+@if (mensaje != "")
+{
+    <div class="alert alert-success"> @mensaje </div>
+}
 <hr />
 <br />
-<div id="dispositivo-list" class="container col-xs-12">
-    @*@Html.Partial("BitacoraList")*@
+<div id="bitacora-list" class="container col-xs-12">
+    @Html.Partial("BitacoraList")
 </div>

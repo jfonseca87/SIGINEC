@@ -1,8 +1,8 @@
 ﻿/// <reference path="Logic.js" />
 $(document).ready(function () {
 
-    //var url = "http://192.168.0.20/siginec";
-    var url = "http://localhost:49240";
+    var url = "http://192.168.0.20/siginec";
+    //var url = "http://localhost:49240";
     var guardaBitacora = 0;
 
     $("#LogIn").click(function () {
@@ -39,7 +39,10 @@ $(document).ready(function () {
         location.href = url + "/home/Salir";
     });
 
-    $("#Entrar").click(function () {
+    $("#Entrar").on("click", function () {
+
+        $(".loading").css("visibility", "visible");
+        $("#Entrar").attr("disabled", true);
 
         var datos = $("#ingForm").serialize();
 
@@ -53,6 +56,8 @@ $(document).ready(function () {
                     location.href = url + "/home/indexaf";
                 } else
                 {
+                    $(".loading").css("visibility", "hidden");
+                    $("#Entrar").attr("disabled", false);
                     $("#mensaje").show();
                 }
             },
@@ -60,6 +65,7 @@ $(document).ready(function () {
                 alert("Ha ocurrido un error contacte con el departamento de Sistemas!!!");
             }
         });
+
     });
 
     $(".page-dispositivo").click(function () {

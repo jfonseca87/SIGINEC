@@ -1,0 +1,23 @@
+﻿@model Model.Usuario
+@{
+    ViewBag.Title = "desactivaUsuario";
+    Layout = null;
+}
+@{Html.BeginForm("desactivaUsuario", "Usuario", FormMethod.Post);}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" style="text-align:center;">
+        Desactivar Usuario
+        <i class="glyphicon glyphicon-remove"></i>
+    </h4>
+</div>
+<div class="modal-body">
+    @Html.HiddenFor(u => u.Id_Usuario)
+    @Html.HiddenFor(u => u.Nick_usuario)
+    <h4> Esta seguro(a) de desactivar el usuario <b> @Model.Nick_usuario</b>.</h4>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="submit" class="btn btn-danger" id="Entrar"> Desactivar </button>
+</div>
+@{Html.EndForm();}

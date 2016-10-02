@@ -139,6 +139,7 @@
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\shop-item.css" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Images\ajax-loader.gif" />
     <Content Include="Assets\Images\imageIndex.jpg" />
     <Content Include="Assets\Images\logoSIGINEC.jpg" />
     <Content Include="Assets\js\bootstrap.js" />
@@ -265,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\js\jquery191.min.js" />
-    <None Include="Properties\PublishProfiles\Prueba.pubxml" />
     <Content Include="Views\Bitacora\BitacoraList.cshtml" />
     <Content Include="Views\Bitacora\detalleBitacora.cshtml" />
     <Content Include="Views\Bitacora\traeImagenes.cshtml" />
@@ -291,6 +291,9 @@
     <Content Include="Views\Informes\InfSolDispositivos.cshtml" />
     <Content Include="Views\Informes\InfSolBajoStock.cshtml" />
     <Content Include="Views\Informes\InfBitacoras.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\PublishWebApp.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

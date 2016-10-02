@@ -30,7 +30,7 @@ CREATE TABLE Usuario
 	Password_Usuario varchar(32)not null,
 	Activo int default 1, 
 	Tipo_Usuario varchar(3),
-	Resposanble int not null default 0,
+	Responsable int not null default 0,
 	Id_Persona int,
 	foreign key (Id_Persona) references Persona(Id_Persona)
 	on delete cascade 
@@ -129,7 +129,7 @@ CREATE TABLE Seguimiento_SolDispositivo
 	foreign key (Id_SolicitudDisp) references Solicitud_Dispositivo(Id_Solicitud)
 	on delete cascade,
 	foreign key (Usuario_Seguimiento) references Usuario(Id_Usuario)
-	on delete cascade
+	on delete no action
 )
 
 GO
@@ -191,7 +191,7 @@ CREATE TABLE Bitacora
 	on delete cascade,
 	foreign key (Usuario_Registra) references Usuario(Id_Usuario)
 	on delete cascade,
-	foreign key (Estado_Dispositivo) references Estado_Dispositivo(Id_Estado)
+	foreign key (Id_Estado_Dispositivo) references Estado_Dispositivo(Id_Estado)
 	on delete cascade
 )
 
@@ -237,5 +237,3 @@ CREATE TABLE Administracion
 	foreign key (Resp_Bodega) references Usuario(Id_Usuario),
 	foreign key (Resp_BajoStock) references Usuario(Id_Usuario)
 )
-
-

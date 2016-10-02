@@ -1,16 +1,39 @@
 ﻿@{
     ViewBag.Title = "Index";
     List<Model.Menu1> lstMenu = ViewBag.Menu1;
+    string Perfil = ViewBag.Perfil;
+    int Id_Usuario = ViewBag.idUsuario;
+    string mensaje = ViewBag.Mensaje;
 }
 
 @section Menu1 {
     @foreach (var item in lstMenu)
     {
-        <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li> 
+        if (item.pagina == "Administracion")
+        {
+            if (Perfil == "adm")
+            {
+                <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+            }
+        }
+        else
+        {
+            <li> <a href="~/@item.pagina/Index"> @item.pagina </a> </li>
+        }
     }
 }
 
-<div class="jumbotron text-center">
-    <h2> Bienvenido a SIGINEC @Session["Nombres"] </h2>
-</div>
+@section Menu2{
+    <a href="javascript:void();" class="list-group-item" data-id="@Id_Usuario" id="cambioPassword"> <b> Cambiar Contraseña </b> </a>
+}
 
+<div class="jumbotron text-center">
+    <h2> Bienvenido a SIGINEC, @Session["Nombres"] </h2>
+</div>
+<br />
+@if (mensaje != "")
+{
+    <div class="alert alert-success"> @mensaje </div>
+}
+<hr />
+<br />
